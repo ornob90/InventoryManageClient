@@ -46,7 +46,10 @@ const DashboardNav = () => {
         </div>
       </div>
       {/* Drawer */}
-      <div className={`${menuOpen ? "w-full h-screen bg-gray-400" : "w-auto"}`}>
+      <div
+        className={`${menuOpen ? "w-full h-screen bg-gray-400" : "w-auto"}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
         <div
           className={` h-[calc(100vh-48px)]  bg-gray-700 w-[60%] sm:w-[40%] md:w-[30%] lg:w-[20%] min-h-[500px] fixed top-[48px]  ${
             menuOpen ? "left-0" : "left-[-100%]"
