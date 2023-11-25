@@ -28,6 +28,14 @@ const DashboardNav = () => {
       name: "Sales Summary",
       slug: "/dashboard/sales-summary",
     },
+    {
+      name: "Manage Shop",
+      slug: "/dashboard/admin/manage-shop",
+    },
+    {
+      name: "Sales Summary",
+      slug: "/dashboard/admin/sales-summary",
+    },
   ];
 
   return (

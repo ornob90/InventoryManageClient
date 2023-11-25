@@ -11,7 +11,7 @@ const CreateShop = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-[500px]">
       <Container className="mt-28">
         <div className="max-h-[100px] flex justify-center items-center  font-bold text-medium sm:text-lg md:text-xl ">
           <p

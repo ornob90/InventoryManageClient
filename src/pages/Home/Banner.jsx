@@ -1,8 +1,10 @@
 import React from "react";
 import Container from "../../components/shared/Container";
 import Button from "../../components/html/Button";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-fixed bg-banner">
       <Container className="flex justify-between items-center min-h-[500px] h-screen">
@@ -12,7 +14,10 @@ const Banner = () => {
             Effortless Inventory Management, <br />
             <span className="text-primary">Elevated Business Success</span>
           </h1>
-          <Button className="px-5 py-3 mt-8 text-sm text-white rounded-md shadow-sm md:text-base bg-primary">
+          <Button
+            onClick={() => navigate("/create-shop")}
+            className="px-5 py-3 mt-8 text-sm text-white rounded-md shadow-sm md:text-base bg-primary"
+          >
             Create Your Shop
           </Button>
         </div>
