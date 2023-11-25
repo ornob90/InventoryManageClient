@@ -42,7 +42,7 @@ const Subscription = () => {
     <ShortContainer>
       <div className="mt-10 text-center">
         <h1 className="text-primary font-bold text-3xl">Pricing</h1>
-        <p className="text-center w-[60%] mx-auto mt-2 text-gray-500">
+        <p className="text-center md:w-[60%] mx-auto mt-2 text-gray-500 text-sm md:text-base ">
           Discover affordable plans tailored to your needs. Choose a
           subscription that fits your requirements today.
         </p>

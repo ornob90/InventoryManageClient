@@ -9,12 +9,12 @@ const ProductManage = () => {
   return (
     <ShortContainer className="mt-10">
       <div className="flex items-center justify-between pb-3 border-b-2">
-        <h1 className="text-xl font-semibold">
+        <h1 className="text-lg md:text-xl font-semibold ">
           Total Products: <span className="text-2xl font-bold ">5</span>
         </h1>
         <Button
           onClick={() => navigate("/dashboard/add-product")}
-          className="px-2 py-2"
+          className="px-3 py-2 text-[12px] sm:text-sm md:text-base"
         >
           Add Product
         </Button>
