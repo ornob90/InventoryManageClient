@@ -92,14 +92,14 @@ const Navbar = () => {
       <li>
         <NavLink
           onClick={() => setHidden(!hidden)}
-          to="/all-books"
+          to="/dashboard"
           className={({ isActive }) =>
             isActive
               ? "dark:text-dark-mode dark:bg-dark-text font-medium bg-primary text-white py-2 px-3 rounded-sm"
               : "font-medium dark:text-dark-text"
           }
         >
-          All Books
+          Dashboard
         </NavLink>
       </li>
       <li>
