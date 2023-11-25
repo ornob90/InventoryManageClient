@@ -8,6 +8,8 @@ import SalesCollection from "../pages/Dashboard/Manager/SalesCollection/SalesCol
 import AddProduct from "../pages/Dashboard/Manager/AddProduct/AddProduct";
 import UpdateProduct from "../pages/Dashboard/Manager/UpdateProduct/UpdateProduct";
 import Checkout from "../pages/Dashboard/Manager/Checkout/Checkout";
+import Subscription from "../pages/Dashboard/Manager/Subscription/Subscription";
+import SalesSummary from "../pages/Dashboard/Manager/SalesSummary/SalesSummary";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/checkout",
         element: <Checkout />,
+      },
+      {
+        path: "/dashboard/subscription",
+        element: <Subscription />,
+      },
+      {
+        path: "/dashboard/sales-summary",
+        element: <SalesSummary />,
       },
     ],
   },
