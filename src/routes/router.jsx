@@ -5,6 +5,7 @@ import CreateShop from "../pages/CreateShop/CreateShop";
 import Dashboard from "../layout/Dashboard";
 import ProductManage from "../pages/Dashboard/Manager/ProductManage/ProductManage";
 import SalesCollection from "../pages/Dashboard/Manager/SalesCollection/SalesCollection";
+import AddProduct from "../pages/Dashboard/Manager/AddProduct/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/sales-collection",
         element: <SalesCollection />,
+      },
+      {
+        path: "/dashboard/add-product",
+        element: <AddProduct />,
       },
     ],
   },
