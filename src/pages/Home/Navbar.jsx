@@ -158,7 +158,7 @@ const Navbar = () => {
           ? "absolute"
           : "fixed"
       } top-0 left-0 drop-shadow-[0_0px_5px_rgba(0,0,0,0.12)]   w-full dark:bg-dark-mode dark:text-dark-text ${
-        pathname === "/login" || pathname === "/signup" || pathname == "/"
+        pathname === "/login" || pathname === "/signup"
           ? "bg-transparent text-white"
           : "bg-gray-100  text-black"
       }  ${loading ? "" : "z-10"}`}
@@ -241,7 +241,7 @@ const Navbar = () => {
                   : ""
               } dark:text-dark-text`}
             >
-              LibraryCatalog
+              InventoHub
             </p>
           </NavLink>
         </div>
