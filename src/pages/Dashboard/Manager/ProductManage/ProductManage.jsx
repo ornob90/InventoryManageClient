@@ -19,6 +19,7 @@ const ProductManage = () => {
           Add Product
         </Button>
       </div>
+
       <ProductManagerTable />
     </ShortContainer>
   );

@@ -23,7 +23,8 @@ const SalesCollection = () => {
           </div>
         </form>
       </div>
-      <div className="flex justify-center mt-10 md:justify-end">
+      <div className="flex items-center justify-between pb-3 mt-10 border-b-2">
+        <h1 className="text-2xl font-bold">Sales Collection</h1>
         <Button
           onClick={() => navigate("/dashboard/checkout")}
           className="flex items-center gap-2 px-4 py-2 bg-primary"
@@ -31,6 +32,7 @@ const SalesCollection = () => {
           Checkout <FaArrowRightFromBracket />
         </Button>
       </div>
+
       <SalesProductTable />
     </ShortContainer>
   );
