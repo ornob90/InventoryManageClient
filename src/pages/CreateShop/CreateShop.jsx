@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Container from "../../components/shared/Container";
 import ShopForm from "../../components/form/ShopForm";
+import ExistShopForm from "../../components/form/ExistShopForm";
 
 const CreateShop = () => {
   const [isCreate, setIsCreate] = useState(true);
@@ -30,7 +31,7 @@ const CreateShop = () => {
             Existing
           </p>
         </div>
-        {isCreate ? <ShopForm method="GET" /> : ""}
+        {isCreate ? <ShopForm method="GET" /> : <ExistShopForm />}
       </Container>
     </div>
   );
