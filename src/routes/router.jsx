@@ -6,7 +6,8 @@ import Dashboard from "../layout/Dashboard";
 import ProductManage from "../pages/Dashboard/Manager/ProductManage/ProductManage";
 import SalesCollection from "../pages/Dashboard/Manager/SalesCollection/SalesCollection";
 import AddProduct from "../pages/Dashboard/Manager/AddProduct/AddProduct";
-import UpdateProduct from "../pages/Dashboard/Manager/UpdateProduct";
+import UpdateProduct from "../pages/Dashboard/Manager/UpdateProduct/UpdateProduct";
+import Checkout from "../pages/Dashboard/Manager/Checkout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/update-product/:id",
         element: <UpdateProduct />,
+      },
+      {
+        path: "/dashboard/checkout",
+        element: <Checkout />,
       },
     ],
   },

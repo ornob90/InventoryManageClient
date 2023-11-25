@@ -32,7 +32,9 @@ const ProductForm = ({ method }) => {
       />
       <TextArea placeholder="Description" rows={3} className="md:col-span-6" />
       <Upload placeHolder="Upload Image" />
-      <Button className="py-2 font-bold md:col-span-6 md:text-lg">Add</Button>
+      <Button className="py-2 font-bold md:col-span-6 md:text-lg">
+        {method === "post" ? "Add" : "Update"}
+      </Button>
     </form>
   );
 };
