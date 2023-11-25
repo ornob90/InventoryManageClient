@@ -1,6 +1,7 @@
 import React from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 const ProductManagerTable = () => {
   return (
     <div className="mt-10 overflow-x-auto">
@@ -33,7 +34,9 @@ const ProductManagerTable = () => {
             <td>10</td>
             <td>3</td>
             <td className="flex items-center h-full gap-2 pt-5 text-xl">
-              <AiFillEdit />
+              <Link to="/dashboard/update-product/1">
+                <AiFillEdit />
+              </Link>
               <MdDelete />
             </td>
           </tr>

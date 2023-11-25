@@ -4,7 +4,7 @@ import TextArea from "../html/TextArea";
 import Upload from "../html/Upload";
 import Button from "../html/Button";
 
-const ProductForm = () => {
+const ProductForm = ({ method }) => {
   return (
     <form className="grid grid-cols-1 gap-3 mt-10 md:grid-cols-6 gap-y-5">
       <Input placeholder="Name" className="md:col-span-3" />

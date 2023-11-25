@@ -6,7 +6,7 @@ const AddProduct = () => {
   return (
     <ShortContainer>
       <h1 className="mt-6 text-2xl font-bold">Add your product</h1>
-      <ProductForm />
+      <ProductForm method="post" />
     </ShortContainer>
   );
 };

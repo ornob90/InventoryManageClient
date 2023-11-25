@@ -6,6 +6,7 @@ import Dashboard from "../layout/Dashboard";
 import ProductManage from "../pages/Dashboard/Manager/ProductManage/ProductManage";
 import SalesCollection from "../pages/Dashboard/Manager/SalesCollection/SalesCollection";
 import AddProduct from "../pages/Dashboard/Manager/AddProduct/AddProduct";
+import UpdateProduct from "../pages/Dashboard/Manager/UpdateProduct";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/add-product",
         element: <AddProduct />,
+      },
+      {
+        path: "/dashboard/update-product/:id",
+        element: <UpdateProduct />,
       },
     ],
   },
