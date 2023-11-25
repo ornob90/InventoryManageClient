@@ -30,7 +30,7 @@ const CreateShop = () => {
             Existing
           </p>
         </div>
-        <ShopForm method="GET" />
+        {isCreate ? <ShopForm method="GET" /> : ""}
       </Container>
     </div>
   );

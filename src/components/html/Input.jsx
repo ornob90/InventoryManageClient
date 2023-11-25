@@ -5,7 +5,7 @@ const Input = ({ type = "text", className = "", placeholder, ...props }) => {
     <input
       type={type}
       placeholder={placeholder}
-      className={`border py-1 pl-4 rounded-lg focus:outline-none ${className}`}
+      className={`border py-2 pl-4  focus:outline-none ${className}`}
       {...props}
     />
   );
