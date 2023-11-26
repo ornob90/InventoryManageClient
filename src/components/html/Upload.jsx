@@ -1,7 +1,7 @@
 import React from "react";
 import { FaUpload } from "react-icons/fa";
 import getPhotoURL from "../../utils/getPhotoUrl";
-const Upload = ({ placeHolder, setImage, setUploading }) => {
+const Upload = ({ placeHolder, setImage, setUploading, productImage }) => {
   const handleFileChange = async (e) => {
     const formData = new FormData();
     setUploading(true);
@@ -18,7 +18,7 @@ const Upload = ({ placeHolder, setImage, setUploading }) => {
         htmlFor="fileInput"
         className="flex items-center gap-2 px-4 py-2 text-[12px] md:text-sm font-semibold text-black bg-white border border-gray-300 rounded-full w-max"
       >
-        <FaUpload /> {placeHolder}
+        <FaUpload /> {productImage ? "Uploaded" : placeHolder}
       </label>
       <input
         id="fileInput"

@@ -7,11 +7,14 @@ import useAuth from "../../hooks/auth/useAuth";
 import usePostSecure from "../../hooks/apiSecure/usePostSecure";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useShop from "../../hooks/data/useShop";
 
 const ProductForm = ({ method }) => {
   const [productImage, setProductImage] = useState("");
   const [uploading, setUploading] = useState(false);
-  const { shopId, user } = useAuth();
+
+  const { shopId, loading } = useShop();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const { mutateAsync: addProduct } = usePostSecure(
@@ -61,6 +64,8 @@ const ProductForm = ({ method }) => {
       if (res.insertOne) {
         toast.success("Inserted successfully!!");
         navigate("/dashboard");
+      } else {
+        toast.error("Product Limit 0!!");
       }
     } catch (error) {
       console.log(error);
@@ -128,6 +133,7 @@ const ProductForm = ({ method }) => {
         placeHolder="Upload Image"
         setImage={setProductImage}
         setUploading={setUploading}
+        productImage={productImage}
       />
 
       <Button
