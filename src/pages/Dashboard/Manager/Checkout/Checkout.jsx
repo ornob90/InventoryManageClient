@@ -5,9 +5,11 @@ import ShortContainer from "../../../../components/shared/ShortContainer";
 import Button from "../../../../components/html/Button";
 import { MdOutlinePaid } from "react-icons/md";
 import CheckoutTable from "./CheckoutTable";
+import useGetSecure from "../../../../hooks/apiSecure/useGetSecure";
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const { data: cartProducts, isLoading } = useGetSecure(["Cart"], "/cart");
   return (
     <ShortContainer className="mt-10">
       <div className="flex items-center justify-between pb-3 border-b-2">
@@ -22,7 +24,7 @@ const Checkout = () => {
         </Button>
       </div>
 
-      <CheckoutTable />
+      <CheckoutTable cartProducts={cartProducts} />
     </ShortContainer>
   );
 };
