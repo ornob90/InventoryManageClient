@@ -6,7 +6,7 @@ const useGetSecure = (queryKeys, endpoint) => {
   const axiosSecure = useAxiosSecure();
 
   const response = useQuery({
-    queryFn: queryKeys,
+    queryKey: queryKeys,
     queryFn: async () => {
       const res = await axiosSecure.get(endpoint);
       return res?.data;

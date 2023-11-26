@@ -2,7 +2,6 @@ import useAxiosSecure from "../axios/useAxiosSecure";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const usePostSecure = (queryKeys, endpoint) => {
-    
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 

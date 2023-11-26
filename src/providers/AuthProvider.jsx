@@ -8,10 +8,32 @@ import {
 import React, { useEffect, useState } from "react";
 import auth, { googleProvider } from "../firebase/firebase.config";
 import AuthContext from "../contexts/AuthContext";
+import axios from "axios";
+import BASE_URL from "../utils/api";
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
+  const [shopId, setShopId] = useState("");
   const [loading, setLoading] = useState(true);
+
+  useState(() => {
+    // console.log(user, shopId);
+    if (user.email) {
+      axios.get(BASE_URL + `/shopID?email=${user.email}`).then((res) => {
+        console.log(res.data);
+        setShopId(res.data.shopID);
+      });
+    }
+  }, [user?.email]);
+
+  useEffect(() => {
+    if (user?.email) {
+      axios.get(BASE_URL + `/shopID?email=${user.email}`).then((res) => {
+        // console.log(res.data);
+        setShopId(res.data.shopID);
+      });
+    }
+  }, []);
 
   const signUpMethod = (email, password) => {
     setLoading(true);
@@ -72,6 +94,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     setUser,
+    shopId,
     loading,
     signUpMethod,
     signInMethod,
