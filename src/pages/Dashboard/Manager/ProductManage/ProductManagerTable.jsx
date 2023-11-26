@@ -45,7 +45,7 @@ const ProductManagerTable = ({ products }) => {
               <td>{product?.productQuantity}</td>
               <td>{product?.saleCount}</td>
               <td className="flex items-center h-full gap-2 pt-5 text-2xl">
-                <Link to="/dashboard/update-product/1">
+                <Link to={`/dashboard/update-product/${product?._id}`}>
                   <AiFillEdit className="text-primary" />
                 </Link>
                 <MdDelete className="text-red-600" />

@@ -9,7 +9,19 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useShop from "../../hooks/data/useShop";
 
-const ProductForm = ({ method }) => {
+const ProductForm = ({ method, product }) => {
+  const {
+    _id,
+    productName,
+    image,
+    productQuantity,
+    productLocation,
+    productionCost,
+    profitMargin,
+    discount,
+    productDescription,
+  } = product || {};
+
   const [productImage, setProductImage] = useState("");
   const [uploading, setUploading] = useState(false);
 
@@ -23,13 +35,13 @@ const ProductForm = ({ method }) => {
   );
 
   const [productInfo, setProductInfo] = useState({
-    productName: "",
-    productQuantity: "",
-    productLocation: "",
-    productionCost: "",
-    profitMargin: "",
-    discount: "",
-    productDescription: "",
+    productName: productName || "",
+    productQuantity: productQuantity || "",
+    productLocation: productLocation || "",
+    productionCost: productionCost || "",
+    profitMargin: profitMargin || "",
+    discount: discount || "",
+    productDescription: productDescription || "",
   });
 
   const handleChange = (e) => {
@@ -78,12 +90,14 @@ const ProductForm = ({ method }) => {
       className="grid grid-cols-1 gap-3 mt-10 md:grid-cols-6 gap-y-5"
     >
       <Input
+        value={productInfo.productName}
         onChange={handleChange}
         placeholder="Name"
         name="productName"
         className="md:col-span-3"
       />
       <Input
+        value={productInfo.productQuantity}
         onChange={handleChange}
         placeholder="Quantity"
         name="productQuantity"
@@ -91,12 +105,14 @@ const ProductForm = ({ method }) => {
         className="md:col-span-3"
       />
       <Input
+        value={productInfo.productLocation}
         onChange={handleChange}
         placeholder="Location"
         name="productLocation"
         className="md:col-span-6"
       />
       <Input
+        value={productInfo.productionCost}
         onChange={handleChange}
         name="productionCost"
         placeholder="Cost"
@@ -105,6 +121,7 @@ const ProductForm = ({ method }) => {
         className="md:col-span-2"
       />
       <Input
+        value={productInfo.profitMargin}
         onChange={handleChange}
         name="profitMargin"
         placeholder="Profit Margin (%)"
@@ -114,6 +131,7 @@ const ProductForm = ({ method }) => {
         max="100"
       />
       <Input
+        value={productInfo.discount}
         onChange={handleChange}
         name="discount"
         placeholder="Discount (%)"
@@ -123,6 +141,7 @@ const ProductForm = ({ method }) => {
         max="100"
       />
       <TextArea
+        value={productInfo.productDescription}
         onChange={handleChange}
         name="productDescription"
         placeholder="Description"

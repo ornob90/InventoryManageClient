@@ -14,6 +14,7 @@ import AdminSalesSummary from "../pages/Dashboard/Admin/SalesSummary/AdminSalesS
 import AdminManageShop from "../pages/Dashboard/Admin/ManageShop/AdminManageShop";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
+import BASE_URL from "../utils/api";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,7 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/update-product/:id",
         element: <UpdateProduct />,
+        loader: ({ params }) => fetch(BASE_URL + `/product/${params.id}`),
       },
       {
         path: "/dashboard/checkout",

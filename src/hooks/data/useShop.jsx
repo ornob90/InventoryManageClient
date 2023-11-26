@@ -13,7 +13,7 @@ const useShop = () => {
     setLoading(true);
     if (user?.email) {
       axios.get(BASE_URL + `/shopID?email=${user.email}`).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setShopId(res.data.shopID);
         setLoading(false);
       });
