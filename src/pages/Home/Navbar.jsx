@@ -261,7 +261,7 @@ const Navbar = () => {
             </div>
 
             <Button
-              //   onClick={handleSignOut}
+              onClick={handleSignOut}
               className="px-2 py-1 text-sm text-white rounded-sm bg-primary md:py-2 md:px-5 md:text-base dark:bg-dark-text dark:text-dark-mode"
             >
               Sign Out
