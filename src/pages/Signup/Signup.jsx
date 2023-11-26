@@ -11,6 +11,7 @@ import usePutPublic from "../../hooks/apiPublic/usePutPublic";
 import axios from "axios";
 import BASE_URL from "../../utils/api";
 import toast from "react-hot-toast";
+import useUser from "../../hooks/others/useUser";
 
 const Signup = () => {
   const { signUpMethod } = useAuth();
@@ -75,11 +76,9 @@ const Signup = () => {
 
         axios.put(BASE_URL + "/user", { email, name }).then((res) => {
           console.log(res.data);
-          if (state) {
-            navigate(state);
-          } else {
-            navigate("/");
-          }
+
+          navigate("/create-user");
+
           setLoading(false);
           toast.success("You have successfully signed up!");
         });

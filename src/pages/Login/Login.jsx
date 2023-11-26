@@ -5,9 +5,13 @@ import { FcGoogle } from "react-icons/fc";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/auth/useAuth";
 import toast from "react-hot-toast";
+import useUser from "../../hooks/others/useUser";
 
 const Login = () => {
+  const { role } = useUser();
   const { signInMethod, googleSignInMethod } = useAuth();
+
+  const redirectPath = role === "user" ? "/create-shop" : "/dashboard";
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -28,11 +32,7 @@ const Login = () => {
       .then((res) => {
         setErrorMsg("");
 
-        if (state) {
-          navigate(state);
-        } else {
-          navigate("/");
-        }
+        navigate(redirectPath || "/create-shop");
 
         setLoading(false);
         toast.success("You have successfully signed in!!");

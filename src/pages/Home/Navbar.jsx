@@ -5,6 +5,7 @@ import useAuth from "../../hooks/auth/useAuth";
 import AuthContext from "../../contexts/AuthContext";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import toast from "react-hot-toast";
+import useUser from "../../hooks/others/useUser";
 
 // import useGet from "../../hooks/useGet";
 // import useAdmin from "../../hooks/useAdmin";
@@ -13,7 +14,7 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { pathname } = useLocation();
-
+  const { role } = useUser();
   const [render, setRender] = useState("");
 
   // const { loading } = useAuth();
@@ -62,7 +63,7 @@ const Navbar = () => {
               : "font-medium dark:text-dark-text"
           }
         >
-          <span
+          {/* <span
             className={`${
               pathname === "/login" || pathname === "/signup"
                 ? "text-black dark:text-dark-text"
@@ -70,36 +71,40 @@ const Navbar = () => {
             }`}
           >
             H
-          </span>
-          ome
+          </span> */}
+          Home
         </NavLink>
       </li>
       <li>
-        <NavLink
-          onClick={() => setHidden(!hidden)}
-          to="/create-shop"
-          className={({ isActive }) =>
-            isActive
-              ? "dark:text-dark-mode dark:bg-dark-text font-medium bg-primary text-white py-2 px-3 rounded-sm"
-              : "font-medium dark:text-dark-text"
-          }
-        >
-          Create Shop
-        </NavLink>
+        {role === "user" && (
+          <NavLink
+            onClick={() => setHidden(!hidden)}
+            to="/create-shop"
+            className={({ isActive }) =>
+              isActive
+                ? "dark:text-dark-mode dark:bg-dark-text font-medium bg-primary text-white py-2 px-3 rounded-sm"
+                : "font-medium dark:text-dark-text"
+            }
+          >
+            Create Shop
+          </NavLink>
+        )}
       </li>
 
       <li>
-        <NavLink
-          onClick={() => setHidden(!hidden)}
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive
-              ? "dark:text-dark-mode dark:bg-dark-text font-medium bg-primary text-white py-2 px-3 rounded-sm"
-              : "font-medium dark:text-dark-text"
-          }
-        >
-          Dashboard
-        </NavLink>
+        {role !== "user" && (
+          <NavLink
+            onClick={() => setHidden(!hidden)}
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "dark:text-dark-mode dark:bg-dark-text font-medium bg-primary text-white py-2 px-3 rounded-sm"
+                : "font-medium dark:text-dark-text"
+            }
+          >
+            Dashboard
+          </NavLink>
+        )}
       </li>
       <li>
         <NavLink

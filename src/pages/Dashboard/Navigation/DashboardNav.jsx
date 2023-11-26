@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { MdOutlineMenu } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
-import useRole from "../../../hooks/others/useRole";
+import useUser from "../../../hooks/others/useUser";
 
 const DashboardNav = () => {
   const [activeNav, setActiveNav] = useState("/dashboard");
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const { role } = useRole();
+  const { role } = useUser();
 
   const navItems = [
     {

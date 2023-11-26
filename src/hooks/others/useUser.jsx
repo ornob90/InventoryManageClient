@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../auth/useAuth";
 import useAxiosPublic from "../axios/useAxiosPublic";
 
-const useRole = () => {
+const useUser = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
-  const [role, setRole] = useState("");
+  const [curUser, setCurUser] = useState("");
 
   useEffect(() => {
     if (user?.email) {
       axiosPublic.get(`/user/${user.email}`).then((res) => {
-        setRole(res.data.role);
+        setCurUser(res.data);
       });
     }
   }, [user, user?.email]);
 
-  return { role };
+  return curUser;
 };
 
-export default useRole;
+export default useUser;

@@ -2,7 +2,7 @@
 2. payment
 3. send promotion email
 4. chart
-5. admin and manager route
+5. admin and manager route 
 6. jwt verify for manager and admin
 7. dynamic title
 8. data-aos animation
@@ -12,4 +12,4 @@
 12. navigate to create shop after register
 13. navigate to create-shop or home after condition based on have shop or not
 14. forbidden route and error page
-15. 
+15. admin and manager nav //** DONE **\\
