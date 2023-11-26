@@ -71,7 +71,7 @@ const DashboardNav = () => {
                   setMenuOpen(false);
                 }}
                 to={slug}
-                key={name}
+                key={slug}
                 className={
                   activeNav === slug ? "bg-primary pl-4 py-2" : "pl-4 py-2"
                 }

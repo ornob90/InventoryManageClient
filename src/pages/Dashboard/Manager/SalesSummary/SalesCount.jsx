@@ -1,23 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GoGraph } from "react-icons/go";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import { FaHandHoldingUsd } from "react-icons/fa";
+import useGetSecure from "../../../../hooks/apiSecure/useGetSecure";
+import useAuth from "../../../../hooks/auth/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
 
 const SalesCount = () => {
+  const { user, loading } = useAuth();
+
+  // const { data } = useGetSecure(
+  //   ["ManagerStates"],
+  //   `/manager-sales-summary?email=${user?.email}`
+  // );
+  const axiosSecure = useAxiosSecure();
+  // const { data } = useQuery({
+  //   queryKey: ["ManageStates"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(
+  //       `/manager-sales-summary?email=${user?.email}`
+  //     );
+  //     return res?.data;
+  //   },
+  // });
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axiosSecure
+      .get(`/manager-sales-summary?email=${user?.email}`)
+      .then((res) => {
+        setData(res?.data);
+      });
+  }, [user, user?.email]);
+
+  // console.log(data);
   const salesCount = [
     {
       title: "Total Sales",
-      state: "31K",
+      state: data?.totalSales || 0,
       icon: <GoGraph />,
     },
     {
       title: "Total Invest",
-      state: "31K",
+      state: data?.totalInvest || 0,
       icon: <FaMoneyBillTrendUp />,
     },
     {
       title: "Total Profit",
-      state: "31K",
+      state: data?.totalProfit || 0,
       icon: <FaHandHoldingUsd />,
     },
   ];

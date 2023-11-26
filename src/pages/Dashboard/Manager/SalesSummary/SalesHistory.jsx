@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
+import useGetSecure from "../../../../hooks/apiSecure/useGetSecure";
+import useAuth from "../../../../hooks/auth/useAuth";
+import getDate from "../../../../utils/getDate";
+import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
 
-const SalesHistory = () => {
+const SalesHistory = ({ email }) => {
+  const { user } = useAuth() || {};
+  // const { data: salesProduct } = useGetSecure(
+  //   ["SalesHistoryManager"],
+  //   `/manager-sales-history?email=${user?.email}`
+  // );
+  // console.log(typeof salesProduct[0].sellingDate);
+
+  const [salesProduct, setSalesProduct] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  useEffect(() => {
+    axiosSecure
+      .get(`/manager-sales-history?email=${user?.email}`)
+      .then((res) => setSalesProduct(res?.data));
+  }, [user, user?.email]);
+
   return (
     <div className="mt-10 overflow-x-auto min-h-[300px]">
       <table className="table text-[12px] md:text-base">
@@ -15,13 +34,14 @@ const SalesHistory = () => {
         </thead>
         <tbody>
           {/* row 1 */}
+          {salesProduct?.map(({ _id, productName, profit, sellingDate }) => (
+            <tr key={_id}>
+              <td>{productName}</td>
+              <td>{getDate(sellingDate)}</td>
 
-          <tr>
-            <td>Zemlak, Daniel and Leannon</td>
-            <td>23/02/20919</td>
-
-            <td>Dhaka</td>
-          </tr>
+              <td>{profit}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
