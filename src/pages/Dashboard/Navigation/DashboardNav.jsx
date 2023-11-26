@@ -2,39 +2,49 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { MdOutlineMenu } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
+import useRole from "../../../hooks/others/useRole";
 
 const DashboardNav = () => {
   const [activeNav, setActiveNav] = useState("/dashboard");
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const { role } = useRole();
+
   const navItems = [
     {
       name: "Product Manage",
       slug: "/dashboard",
+      show: role === "manager",
     },
     {
       name: "Sales Collection",
       slug: "/dashboard/sales-collection",
+      show: role === "manager",
     },
     {
       name: "Checkout",
       slug: "/dashboard/checkout",
+      show: role === "manager",
     },
     {
       name: "Subscription",
       slug: "/dashboard/subscription",
+      show: role === "manager",
     },
     {
       name: "Sales Summary",
       slug: "/dashboard/sales-summary",
+      show: role === "manager",
     },
     {
       name: "Manage Shop",
       slug: "/dashboard/admin/manage-shop",
+      show: role === "admin",
     },
     {
       name: "Sales Summary",
       slug: "/dashboard/admin/sales-summary",
+      show: role === "admin",
     },
   ];
 
@@ -64,20 +74,24 @@ const DashboardNav = () => {
           } duration-[.3s]`}
         >
           <ul className="flex flex-col gap-4 pt-4 font-semibold text-white text-medium">
-            {navItems.map(({ name, slug }) => (
-              <NavLink
-                onClick={() => {
-                  setActiveNav(slug);
-                  setMenuOpen(false);
-                }}
-                to={slug}
-                key={slug}
-                className={
-                  activeNav === slug ? "bg-primary pl-4 py-2" : "pl-4 py-2"
-                }
-              >
-                {name}
-              </NavLink>
+            {navItems.map(({ name, slug, show }) => (
+              <>
+                {show && (
+                  <NavLink
+                    onClick={() => {
+                      setActiveNav(slug);
+                      setMenuOpen(false);
+                    }}
+                    to={slug}
+                    key={slug}
+                    className={
+                      activeNav === slug ? "bg-primary pl-4 py-2" : "pl-4 py-2"
+                    }
+                  >
+                    {name}
+                  </NavLink>
+                )}
+              </>
             ))}
           </ul>
         </div>

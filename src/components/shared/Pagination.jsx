@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
-const Pagination = () => {
-  const [page, setPage] = useState(0);
-
+const Pagination = ({ setPage, page }) => {
   return (
     <div className="flex justify-center items-center gap-4 mt-4 flex-wrap">
       {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
