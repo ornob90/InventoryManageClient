@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../axios/useAxiosSecure";
 
-const useDeleteSecure = (queryKeys, endpoint) => {
+const useDeleteSecure = (queryKeys) => {
   const queryClient = useQueryClient();
 
   const axiosSecure = useAxiosSecure();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (endpoint) => {
       const res = await axiosSecure.delete(endpoint);
       return res?.data;
     },

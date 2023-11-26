@@ -8,6 +8,7 @@ import usePostSecure from "../../hooks/apiSecure/usePostSecure";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useShop from "../../hooks/data/useShop";
+import usePutSecure from "../../hooks/apiSecure/usePutSecure";
 
 const ProductForm = ({ method, product }) => {
   const {
@@ -32,6 +33,11 @@ const ProductForm = ({ method, product }) => {
   const { mutateAsync: addProduct } = usePostSecure(
     [["products", user?.email]],
     "/product"
+  );
+
+  const { mutateAsync: updateProduct } = usePutSecure(
+    [["products", user?.email]],
+    `/product/${product?._id}`
   );
 
   const [productInfo, setProductInfo] = useState({
@@ -62,22 +68,35 @@ const ProductForm = ({ method, product }) => {
     const profitPercentage =
       (cost * parseFloat(productInfo.profitMargin)) / 100;
 
-    const product = {
+    const newProduct = {
       ...productInfo,
-      image: productImage || "",
+      image: productImage || product?.image || "",
       shopId,
       userEmail: user?.email,
       sellingPrice: cost + tax + profitPercentage,
     };
 
+    if (method === "post") {
+    }
     try {
-      const res = await addProduct(product);
-      console.log(res);
-      if (res.insertOne) {
-        toast.success("Inserted successfully!!");
-        navigate("/dashboard");
+      if (method === "post") {
+        const res = await addProduct(newProduct);
+        console.log(res);
+        if (res.insertOne) {
+          toast.success("Inserted successfully!!");
+          navigate("/dashboard");
+        } else {
+          toast.error("Product Limit 0!!");
+        }
       } else {
-        toast.error("Product Limit 0!!");
+        const res = await updateProduct(newProduct);
+        console.log(res);
+        if (res.updateOne) {
+          toast.success("Update successfully!!");
+          navigate("/dashboard");
+        } else {
+          navigate("/dashboard");
+        }
       }
     } catch (error) {
       console.log(error);
