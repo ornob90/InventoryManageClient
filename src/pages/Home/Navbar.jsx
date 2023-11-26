@@ -23,7 +23,6 @@ const Navbar = () => {
   // }, [loading]);
 
   const loading = false;
-  const user = false;
 
   const [theme, setTheme] = useState("light");
   const html = document.documentElement;
@@ -44,7 +43,7 @@ const Navbar = () => {
   const [hidden, setHidden] = useState(false);
 
   const navigate = useNavigate();
-  // const { user, signOutMethod } = useAuth();
+  const { user, signOutMethod } = useAuth();
   // console.log(user?.photoURL);
 
   //   const { validAdmin } = useAdmin();
@@ -194,16 +193,14 @@ const Navbar = () => {
               <li className="flex flex-row items-center justify-center mb-4">
                 <div className="rounded-full md:hidden">
                   <img
-                    // src={user && user.photoURL}
+                    src={user && user.photoURL}
                     alt=""
                     className=" rounded-full object-cover h-[35px] w-[35px]"
                   />
                 </div>
 
                 <div className="flex w-[50%] items-center  h-full flex-row justify-between">
-                  <p className="md:hidden w-max">
-                    {/* {user && user.displayName } */}
-                  </p>
+                  <p className="md:hidden w-max">{user && user.displayName}</p>
                   <div className="w-[30px] md:w-[50px] flex justify-end">
                     {theme === "dark" ? (
                       <BsFillSunFill
@@ -251,12 +248,12 @@ const Navbar = () => {
         {user ? (
           <div className="flex items-center justify-end gap-4">
             <p className="hidden md:block dark:text-dark-text">
-              {/* {user && user.displayName} */}
+              {user && user.displayName}
             </p>
             <div className="hidden md:block h-[40px] w-[40px] rounded-full border border-black">
               {user && (
                 <img
-                  // src={user && user.photoURL}
+                  src={user && user.photoURL}
                   alt=""
                   className="object-cover w-full h-full rounded-full"
                 />

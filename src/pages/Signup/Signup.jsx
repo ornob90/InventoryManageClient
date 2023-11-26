@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FaUpload } from "react-icons/fa6";
 import useAuth from "../../hooks/auth/useAuth";
 import getPhotoURL from "../../utils/getPhotoUrl";
+import { updateProfile } from "firebase/auth";
 
 const Signup = () => {
   const { signUpMethod } = useAuth();
@@ -27,24 +28,26 @@ const Signup = () => {
 
     formData.append("image", photo);
 
-    const url = await getPhotoURL(formData);
-
+    // const url = await getPhotoURL(formData);
+    const url = "234241243134";
     console.log(url);
 
-    // if (password.length < 6) {
-    //   setErrorMsg("Password Length Must Be More Then 6 Characters!!");
-    //   return;
-    // }
+    // console.log(url);
 
-    // if (/^[^A-Z]*$/.test(password)) {
-    //   setErrorMsg("Password must contain atleast one capital letter");
-    //   return;
-    // }
+    if (password.length < 6) {
+      setErrorMsg("Password Length Must Be More Then 6 Characters!!");
+      return;
+    }
 
-    // if (/^[a-zA-Z0-9\s]*$/.test(password)) {
-    //   setErrorMsg("Password must contain a special character");
-    //   return;
-    // }
+    if (/^[^A-Z]*$/.test(password)) {
+      setErrorMsg("Password must contain atleast one capital letter");
+      return;
+    }
+
+    if (/^[a-zA-Z0-9\s]*$/.test(password)) {
+      setErrorMsg("Password must contain a special character");
+      return;
+    }
     setLoading(true);
 
     // e.target.email.value = "";
@@ -52,27 +55,27 @@ const Signup = () => {
     // e.target.name.value = "";
     // e.target.photo.value = "";
 
-    // signUpMethod(email, password)
-    //   .then((res) => {
-    //     setErrorMsg("");
-    //     updateProfile(res.user, {
-    //       displayName: name,
-    //       photoURL: photo,
-    //     });
+    signUpMethod(email, password)
+      .then((res) => {
+        setErrorMsg("");
+        updateProfile(res.user, {
+          displayName: name,
+          photoURL: url,
+        });
 
-    //     if (state) {
-    //       navigate(state);
-    //     } else {
-    //       navigate("/");
-    //     }
-    //     setLoading(false);
-    //     toast.success("You have successfully signed up!");
-    //   })
-    //   .catch((err) => {
-    //     setLoading(false);
-    //     setErrorMsg(err.message);
-    //     console.log(err);
-    //   });
+        if (state) {
+          navigate(state);
+        } else {
+          navigate("/");
+        }
+        setLoading(false);
+        toast.success("You have successfully signed up!");
+      })
+      .catch((err) => {
+        setLoading(false);
+        setErrorMsg(err.message);
+        console.log(err);
+      });
   };
 
   return (
@@ -109,6 +112,7 @@ const Signup = () => {
           />
           <Input
             name="password"
+            type="password"
             placeholder="Password"
             className="py-2 text-sm md:text-base"
           />
