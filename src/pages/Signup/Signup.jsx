@@ -7,6 +7,10 @@ import { FaUpload } from "react-icons/fa6";
 import useAuth from "../../hooks/auth/useAuth";
 import getPhotoURL from "../../utils/getPhotoUrl";
 import { updateProfile } from "firebase/auth";
+import usePutPublic from "../../hooks/apiPublic/usePutPublic";
+import axios from "axios";
+import BASE_URL from "../../utils/api";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const { signUpMethod } = useAuth();
@@ -15,6 +19,8 @@ const Signup = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [loading, setLoading] = useState(false);
+
+  const { mutateAsync: addUser } = usePutPublic(null, "/user");
   // const { setUser } = useAuth();
 
   const handleRegister = async (e) => {
@@ -28,8 +34,8 @@ const Signup = () => {
 
     formData.append("image", photo);
 
-    // const url = await getPhotoURL(formData);
-    const url = "234241243134";
+    const url = await getPhotoURL(formData);
+    // const url = "234241243134";
     console.log(url);
 
     // console.log(url);
@@ -50,10 +56,10 @@ const Signup = () => {
     }
     setLoading(true);
 
-    // e.target.email.value = "";
-    // e.target.password.value = "";
-    // e.target.name.value = "";
-    // e.target.photo.value = "";
+    e.target.email.value = "";
+    e.target.password.value = "";
+    e.target.name.value = "";
+    e.target.photo.value = "";
 
     signUpMethod(email, password)
       .then((res) => {
@@ -63,13 +69,20 @@ const Signup = () => {
           photoURL: url,
         });
 
-        if (state) {
-          navigate(state);
-        } else {
-          navigate("/");
-        }
-        setLoading(false);
-        toast.success("You have successfully signed up!");
+        // addUser({ email, name }).then((res) => {
+
+        // });
+
+        axios.put(BASE_URL + "/user", { email, name }).then((res) => {
+          console.log(res.data);
+          if (state) {
+            navigate(state);
+          } else {
+            navigate("/");
+          }
+          setLoading(false);
+          toast.success("You have successfully signed up!");
+        });
       })
       .catch((err) => {
         setLoading(false);
@@ -130,6 +143,7 @@ const Signup = () => {
             name="photo"
             // onChange={handleFileChange}
           />
+          {errorMsg && <p className="text-red-600">{errorMsg}</p>}
           <Button className="py-2 mt-3 text-sm text-white md:text-base">
             Join
           </Button>
