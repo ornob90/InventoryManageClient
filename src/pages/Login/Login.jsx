@@ -1,11 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../components/html/Input";
 import Button from "../../components/html/Button";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/auth/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const { signInMethod, googleSignInMethod } = useAuth();
+
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const { state } = useLocation();
   const navigate = useNavigate();
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    e.target.email.value = "";
+    e.target.password.value = "";
+
+    signInMethod(email, password)
+      .then((res) => {
+        setErrorMsg("");
+
+        if (state) {
+          navigate(state);
+        } else {
+          navigate("/");
+        }
+
+        setLoading(false);
+        toast.success("You have successfully signed in!!");
+      })
+      .catch((err) => {
+        setLoading(false);
+        setErrorMsg(err.message);
+        console.log(err.message);
+      });
+  };
 
   return (
     <div className="h-screen min-h-[500px] w-[95%] mx-auto grid  grid-cols-1 lg:grid-cols-2">
@@ -27,7 +64,10 @@ const Login = () => {
       {/* Login Part */}
       <div className="w-[80%] lg:w-[70%] mx-auto my-[2.5%]  flex flex-col justify-center items-center h-auto">
         <h1 className="text-2xl font-clashBold md:text-3xl">Welcome back!</h1>
-        <form className="flex flex-col w-full gap-2 mt-6 ">
+        <form
+          onSubmit={handleSignIn}
+          className="flex flex-col w-full gap-2 mt-6 "
+        >
           <Input
             name="email"
             placeholder="Email"
@@ -35,9 +75,11 @@ const Login = () => {
           />
           <Input
             name="password"
+            type="password"
             placeholder="Password"
             className="py-2 text-sm md:text-base"
           />
+          {errorMsg && <p className="text-red-600">{errorMsg}</p>}
           <Button className="py-2 mt-3 text-sm text-white md:text-base">
             Connect
           </Button>
