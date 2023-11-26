@@ -1,12 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../components/html/Input";
 import Button from "../../components/html/Button";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FaUpload } from "react-icons/fa6";
+import useAuth from "../../hooks/auth/useAuth";
+import getPhotoURL from "../../utils/getPhotoUrl";
 
 const Signup = () => {
+  const { signUpMethod } = useAuth();
+  const [errorMsg, setErrorMsg] = useState("");
+  const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const [loading, setLoading] = useState(false);
+  // const { setUser } = useAuth();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const name = e.target.name.value;
+    const photo = e.target.photo.files[0];
+
+    const formData = new FormData();
+
+    formData.append("image", photo);
+
+    const url = await getPhotoURL(formData);
+
+    console.log(url);
+
+    // if (password.length < 6) {
+    //   setErrorMsg("Password Length Must Be More Then 6 Characters!!");
+    //   return;
+    // }
+
+    // if (/^[^A-Z]*$/.test(password)) {
+    //   setErrorMsg("Password must contain atleast one capital letter");
+    //   return;
+    // }
+
+    // if (/^[a-zA-Z0-9\s]*$/.test(password)) {
+    //   setErrorMsg("Password must contain a special character");
+    //   return;
+    // }
+    setLoading(true);
+
+    // e.target.email.value = "";
+    // e.target.password.value = "";
+    // e.target.name.value = "";
+    // e.target.photo.value = "";
+
+    // signUpMethod(email, password)
+    //   .then((res) => {
+    //     setErrorMsg("");
+    //     updateProfile(res.user, {
+    //       displayName: name,
+    //       photoURL: photo,
+    //     });
+
+    //     if (state) {
+    //       navigate(state);
+    //     } else {
+    //       navigate("/");
+    //     }
+    //     setLoading(false);
+    //     toast.success("You have successfully signed up!");
+    //   })
+    //   .catch((err) => {
+    //     setLoading(false);
+    //     setErrorMsg(err.message);
+    //     console.log(err);
+    //   });
+  };
 
   return (
     <div className="h-screen min-h-[500px] w-[95%] mx-auto grid  grid-cols-1 lg:grid-cols-2">
@@ -26,7 +93,10 @@ const Signup = () => {
       {/* Login Part */}
       <div className="w-[80%] lg:w-[70%] mx-auto my-[2.5%]  flex flex-col justify-center items-center h-auto">
         <h1 className="text-2xl font-clashBold md:text-3xl">Join us today!</h1>
-        <form className="flex flex-col w-full gap-2 mt-6 ">
+        <form
+          onSubmit={handleRegister}
+          className="flex flex-col w-full gap-2 mt-6 "
+        >
           <Input
             name="name"
             placeholder="User name"
@@ -52,7 +122,8 @@ const Signup = () => {
           <input
             id="fileInput"
             type="file"
-            className="hidden"
+            className=""
+            name="photo"
             // onChange={handleFileChange}
           />
           <Button className="py-2 mt-3 text-sm text-white md:text-base">

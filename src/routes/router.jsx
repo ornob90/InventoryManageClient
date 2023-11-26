@@ -12,6 +12,8 @@ import Subscription from "../pages/Dashboard/Manager/Subscription/Subscription";
 import SalesSummary from "../pages/Dashboard/Manager/SalesSummary/SalesSummary";
 import AdminSalesSummary from "../pages/Dashboard/Admin/SalesSummary/AdminSalesSummary";
 import AdminManageShop from "../pages/Dashboard/Admin/ManageShop/AdminManageShop";
+import Login from "../pages/Login/Login";
+import Signup from "../pages/Signup/Signup";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
         element: <CreateShop />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
   {
     path: "/dashboard",

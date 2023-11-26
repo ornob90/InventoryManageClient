@@ -1,16 +1,13 @@
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import auth, { googleProvider } from "../Firebase/firebase.config";
+import auth, { googleProvider } from "../firebase/firebase.config";
 import AuthContext from "../contexts/AuthContext";
-import BASE_URL from "../api/api";
-import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -47,13 +44,13 @@ const AuthProvider = ({ children }) => {
 
         const loggedUser = { email: userEmail };
 
-        axios.post(BASE_URL + "/jwt", loggedUser).then((res) => {
-          if (res?.data?.token) {
-            console.log("token response", res.data.token);
-            localStorage.setItem("token", res.data.token);
-            setLoading(false);
-          }
-        });
+        // axios.post(BASE_URL + "/jwt", loggedUser).then((res) => {
+        //   if (res?.data?.token) {
+        //     console.log("token response", res.data.token);
+        //     localStorage.setItem("token", res.data.token);
+        //     setLoading(false);
+        //   }
+        // });
       } else {
         // axios
         //   .post(BASE_URL + "/logout", loggedUser, {
