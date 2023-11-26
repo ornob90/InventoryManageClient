@@ -1,19 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ShortContainer from "../../../../components/shared/ShortContainer";
 import Button from "../../../../components/html/Button";
 import Input from "../../../../components/html/Input";
 import SalesProductTable from "./SalesProductTable";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../../../hooks/auth/useAuth";
+import useGetSecure from "../../../../hooks/apiSecure/useGetSecure";
 
 const SalesCollection = () => {
   const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+
+  const { user } = useAuth();
+  const { data: initialProducts, isLoading } = useGetSecure(
+    ["products", user?.email],
+    `/products/${user?.email}`
+  );
+
+  useEffect(() => {
+    setProducts(initialProducts);
+  }, [initialProducts]);
+
+  const handleSearch = (e) => {
+    if (!e.target) {
+      setProducts(initialProducts);
+      return;
+    }
+    setProducts(
+      initialProducts.filter(({ _id }) => _id.includes(e.target.value))
+    );
+  };
 
   return (
     <ShortContainer>
       <div className="">
         <form className="grid md:w-[70%] mx-auto grid-cols-6 mt-5 ">
           <Input
+            onChange={handleSearch}
             type="text"
             className="col-span-4 md:col-span-5"
             placeholder="Search"
@@ -35,7 +59,7 @@ const SalesCollection = () => {
         </Button>
       </div>
 
-      <SalesProductTable />
+      <SalesProductTable products={products} />
     </ShortContainer>
   );
 };

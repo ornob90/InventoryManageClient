@@ -2,10 +2,12 @@ import React from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { MdShoppingCartCheckout } from "react-icons/md";
 import { Link } from "react-router-dom";
+import useAuth from "../../../../hooks/auth/useAuth";
+import useGetSecure from "../../../../hooks/apiSecure/useGetSecure";
 
-const SalesProductTable = () => {
+const SalesProductTable = ({ products }) => {
   return (
-    <div className="mt-5 overflow-x-auto">
+    <div className="mt-5 overflow-x-auto min-h-[300px]">
       <table className="table text-[12px] ">
         <thead className="font-bold text-black">
           <tr>
@@ -19,27 +21,29 @@ const SalesProductTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>23poh2093hifo2fhf2</td>
-            <td>Zemlak, Daniel and Leannon</td>
-            <td>
-              <div className="avatar">
-                <div className="w-12 h-12 rounded-lg mask">
-                  <img
-                    src="https://t3.ftcdn.net/jpg/02/41/43/18/360_F_241431868_8DFQpCcmpEPVG0UvopdztOAd4a6Rqsoo.jpg"
-                    alt="Avatar Tailwind CSS Component"
-                  />
+          {products?.map((product) => (
+            <tr key={product?._id}>
+              <td>{product?._id}</td>
+              <td>{product?.productName}</td>
+              <td>
+                <div className="avatar">
+                  <div className="w-12 h-12 rounded-lg mask">
+                    <img
+                      src={product?.image}
+                      alt="Avatar Tailwind CSS Component"
+                    />
+                  </div>
                 </div>
-              </div>
-            </td>
+              </td>
 
-            <td>10</td>
-            <td>40</td>
-            <td>3</td>
-            <td className="flex items-center h-full gap-2 pt-5 text-2xl">
-              <MdShoppingCartCheckout className="text-primary" />
-            </td>
-          </tr>
+              <td>{product?.productQuantity}</td>
+              <td>{product?.discount}%</td>
+              <td>{product?.saleCount}</td>
+              <td className="flex items-center h-full gap-2 pt-5 text-2xl">
+                <MdShoppingCartCheckout className="text-primary" />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
