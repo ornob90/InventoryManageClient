@@ -76,8 +76,6 @@ const ProductForm = ({ method, product }) => {
       sellingPrice: cost + tax + profitPercentage,
     };
 
-    if (method === "post") {
-    }
     try {
       if (method === "post") {
         const res = await addProduct(newProduct);
@@ -87,8 +85,9 @@ const ProductForm = ({ method, product }) => {
           navigate("/dashboard");
         } else {
           toast.error("Product Limit 0!!");
+          navigate("/dashboard/subscription");
         }
-      } else {
+      } else if (method === "put") {
         const res = await updateProduct(newProduct);
         console.log(res);
         if (res.updateOne) {
