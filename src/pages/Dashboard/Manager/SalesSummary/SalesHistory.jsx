@@ -5,7 +5,7 @@ import useAuth from "../../../../hooks/auth/useAuth";
 import getDate from "../../../../utils/getDate";
 import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
 
-const SalesHistory = ({ email }) => {
+const SalesHistory = ({ page, size, pageCount, setPageCount }) => {
   const { user } = useAuth() || {};
   // const { data: salesProduct } = useGetSecure(
   //   ["SalesHistoryManager"],
@@ -14,11 +14,22 @@ const SalesHistory = ({ email }) => {
   // console.log(typeof salesProduct[0].sellingDate);
 
   const [salesProduct, setSalesProduct] = useState([]);
+
   const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    setPageCount(Math.ceil(salesProduct?.length / size));
+  }, [size]);
+
   useEffect(() => {
     axiosSecure
-      .get(`/manager-sales-history?email=${user?.email}`)
-      .then((res) => setSalesProduct(res?.data));
+      .get(
+        `/manager-sales-history?email=${user?.email}&page=${page}&size=${size}`
+      )
+      .then((res) => {
+        setSalesProduct(res?.data);
+        setPageCount(Math.ceil(res?.data?.length / size));
+      });
   }, [user, user?.email]);
 
   return (

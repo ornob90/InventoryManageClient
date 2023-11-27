@@ -4,7 +4,7 @@
 4. chart
 5. admin and manager route                                                               //** DONE **\\
 6. jwt verify for manager and admin
-7. dynamic title
+7. dynamic title                                                                         //** DONE **\\
 8. data-aos animation
 9. optional second task
 10. get paid in checkout                                                                 //** DONE **\\

@@ -11,11 +11,17 @@ import { FaHandHoldingUsd } from "react-icons/fa";
 
 const SalesSummary = () => {
   const { user, loading } = useAuth();
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
+  // console.log("page ", page);
+  // console.log("size ", size);
 
   // const { data } = useGetSecure(
   //   ["ManagerStates"],
   //   `/manager-sales-summary?email=${user?.email}`
   // );
+  // console.log(page, size, pageCount);
   const axiosSecure = useAxiosSecure();
   // const { data } = useQuery({
   //   queryKey: ["ManageStates"],
@@ -59,8 +65,18 @@ const SalesSummary = () => {
   return (
     <ShortContainer className="min-h-[300px]">
       <SalesCount salesCount={salesCount} />
-      <SalesHistory />
-      <Pagination />
+      <SalesHistory
+        page={page}
+        size={size}
+        // pageCount={pageCount}
+        setPageCount={setPageCount}
+      />
+      <Pagination
+        setPage={setPage}
+        pageCount={pageCount}
+        page={page}
+        setSize={setSize}
+      />
     </ShortContainer>
   );
 };
