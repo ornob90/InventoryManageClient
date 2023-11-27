@@ -2,7 +2,7 @@
 2. payment                                                                               //** DONE **\\
 3. send promotion email
 4. chart
-5. admin and manager route 
+5. admin and manager route                                                               //** DONE **\\
 6. jwt verify for manager and admin
 7. dynamic title
 8. data-aos animation
