@@ -29,7 +29,11 @@ const FAQ = () => {
         Frequently Asked Questions
       </p>
       {faqData.map(({ id, question, answer }) => (
-        <div key={id} className="mb-7 collapse collapse-plus bg-base-200">
+        <div
+          data-aos={id % 2 === 0 ? "fade-left" : "fade-right"}
+          key={id}
+          className="mb-7 collapse collapse-plus bg-base-200"
+        >
           <input type="radio" name="my-accordion-3" checked="checked" />
           <div className="text-xl font-medium collapse-title">{question}</div>
           <div className="collapse-content">

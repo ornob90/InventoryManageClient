@@ -46,7 +46,10 @@ const Testimonial = () => {
   ];
   return (
     <div className="pb-10 bg-gray-200">
-      <p className="pt-16 text-xl font-bold text-center font-clashBold md:text-2xl lg:text-3xl">
+      <p
+        data-aos="fade-up"
+        className="pt-16 text-xl font-bold text-center font-clashBold md:text-2xl lg:text-3xl"
+      >
         Word's Of Satisfaction
       </p>
       <Swiper

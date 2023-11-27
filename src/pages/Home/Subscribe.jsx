@@ -9,14 +9,23 @@ const Subscribe = () => {
       //   style={{ backgroundColor: "red" }}
     >
       <Container className="flex flex-col items-center justify-center gap-2 md:block">
-        <h1 className="mb-4 text-xl sm:text-2xl lg:text-3xl w-[80%] md:w-[40%] font-bold text-center md:text-left">
+        <h1
+          data-aos="fade-right"
+          className="mb-4 text-xl sm:text-2xl lg:text-3xl w-[80%] md:w-[40%] font-bold text-center md:text-left"
+        >
           Subscribe to Our Newsletter
         </h1>
-        <p className="text-[12px] text-center md:text-left text-gray-300">
+        <p
+          data-aos="fade-right"
+          className="text-[12px] text-center md:text-left text-gray-300"
+        >
           Stay updated with the latest news, product releases, and exclusive
           offers. Subscribe now!
         </p>
-        <div className="flex items-center justify-center w-full gap-1 md:justify-start">
+        <div
+          data-aos="fade-right"
+          className="flex items-center justify-center w-full gap-1 md:justify-start"
+        >
           <input
             type="text"
             className="focus:outline-none  py-2 pl-3 w-[60%] sm:w-[80%] md:w-[40%] my-2  text-black text-sm"
@@ -26,7 +35,10 @@ const Subscribe = () => {
             Join NOW
           </Button>
         </div>
-        <p className="text-[12px] text-center md:text-left text-gray-300">
+        <p
+          data-aos="fade-right"
+          className="text-[12px] text-center md:text-left text-gray-300"
+        >
           By joining, you agree to our terms and conditions
         </p>
       </Container>

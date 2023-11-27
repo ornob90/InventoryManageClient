@@ -13,7 +13,7 @@ const DashboardNav = () => {
   const navItems = [
     {
       name: "Product Manage",
-      slug: "/dashboard",
+      slug: "/dashboard/product-manage",
       show: role === "manager",
     },
     {
@@ -44,8 +44,7 @@ const DashboardNav = () => {
     {
       name: "Sales Summary",
       slug: "/dashboard/admin/sales-summary",
-      // show: role === "admin",
-      show: true,
+      show: role === "admin",
     },
   ];
 

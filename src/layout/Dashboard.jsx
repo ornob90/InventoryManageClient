@@ -19,7 +19,7 @@ const Dashboard = () => {
   useEffect(() => {
     let newPath = pathname.replace(/\//g, " ").split(" ");
 
-    let title = "";
+    let title = "InventoryHub | ";
     newPath.forEach((path) => {
       if (path) path = path[0].toUpperCase() + path.slice(1) + " | ";
 

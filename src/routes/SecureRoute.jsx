@@ -9,16 +9,16 @@ const SecureRoute = ({ children }) => {
 
   const { user, loading } = useAuth();
 
-  console.log(loading, managerLoad);
+  // console.log(loading, managerLoad);
   if (loading || managerLoad) {
     return <Loading />;
   } else if (user && role && role !== "user") {
-    console.log(role);
+    // console.log(role);
     return children;
   }
   //   window.location.href = "/";
 
-  return <Navigate to="/"></Navigate>;
+  return <Navigate to="/forbidden"></Navigate>;
   //   return <></>;
 };
 

@@ -14,7 +14,7 @@ const AdminRoute = ({ children }) => {
 
   if (user && role && role === "admin") return children;
 
-  return <Navigate to="/"></Navigate>;
+  return <Navigate to="/forbidden"></Navigate>;
 };
 
 export default AdminRoute;

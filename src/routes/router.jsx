@@ -19,11 +19,14 @@ import PrivateRoute from "../routes/PrivateRoute";
 import ManagerRoute from "./ManagerRoute";
 import SecureRoute from "./SecureRoute";
 import AdminRoute from "./AdminRoute";
+import Error from "../pages/Error/Error";
+import Forbidden from "../pages/Forbidden/Forbidden";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -42,10 +45,16 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    errorElement: <Error />,
   },
   {
     path: "/signup",
     element: <Signup />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/forbidden",
+    element: <Forbidden />,
   },
   {
     path: "/dashboard",
@@ -56,6 +65,7 @@ const router = createBrowserRouter([
         </SecureRoute>
       </PrivateRoute>
     ),
+    errorElement: <Error />,
     children: [
       {
         path: "/dashboard/product-manage",
@@ -116,7 +126,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin/sales-summary",
-        element: <AdminSalesSummary />,
+        element: (
+          <AdminRoute>
+            <AdminSalesSummary />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/admin/manage-shop",

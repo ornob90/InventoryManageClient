@@ -17,7 +17,7 @@ const ManagerRoute = ({ children }) => {
   }
   console.log(role);
 
-  return <Navigate to="/"></Navigate>;
+  return <Navigate to="/forbidden"></Navigate>;
 };
 
 export default ManagerRoute;

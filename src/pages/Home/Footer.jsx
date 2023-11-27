@@ -13,21 +13,23 @@ const Footer = () => {
         } dark:text-dark-text`}
       >
         <aside className="">
-          <NavLink className="text-lg md:text-2xl">InventoHub</NavLink>
-          <p>
+          <NavLink data-aos="fade-right" className="text-lg md:text-2xl">
+            InventoHub
+          </NavLink>
+          <p data-aos="fade-up">
             123 Main Street,
             <br />
             Cityville, State, 12345
           </p>
         </aside>
-        <nav>
+        <nav data-aos="fade-up">
           <header className="footer-title">Services</header>
           <a className="link link-hover">Product Management</a>
           <a className="link link-hover">Discount and Coupon Management</a>
           <a className="link link-hover">Sales and Invoice Generation</a>
           <a className="link link-hover">User and Shop Management</a>
         </nav>
-        <nav>
+        <nav data-aos="fade-up">
           <header className="footer-title">Copyright</header>
           <a href="#" className="link link-hover">
             Facebook
@@ -39,7 +41,7 @@ const Footer = () => {
             Twitter
           </a>
         </nav>
-        <nav>
+        <nav data-aos="fade-up">
           <header className="footer-title">Legal</header>
           <a className="link link-hover">Terms of use</a>
           <a className="link link-hover">Privacy policy</a>

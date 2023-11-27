@@ -2,11 +2,18 @@ import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../pages/Home/Navbar";
 import Footer from "../pages/Home/Footer";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Root = () => {
   const { pathname } = useLocation();
+
   useEffect(() => {
-    let title = "Home ";
+    Aos.init();
+  }, []);
+
+  useEffect(() => {
+    let title = "InventoryHub | ";
     if (pathname !== "/") {
       title += "| ";
       let newPath = pathname.replace(/\//g, " ").split(" ");
@@ -21,7 +28,7 @@ const Root = () => {
   }, [pathname]);
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Navbar />
       <Outlet />
       <Footer />

@@ -1,15 +1,15 @@
-1. pagination for every page
+1. pagination for every page                                                             //** DONE **\\
 2. payment                                                                               //** DONE **\\
 3. send promotion email
 4. chart
 5. admin and manager route                                                               //** DONE **\\
 6. jwt verify for manager and admin
 7. dynamic title                                                                         //** DONE **\\
-8. data-aos animation
+8. data-aos animation                                                                    //** DONE **\\
 9. optional second task
 10. get paid in checkout                                                                 //** DONE **\\
 11. generate pdf
 12. navigate to create shop after register                                               //** DONE **\\
 13. navigate to create-shop or home after condition based on have shop or not            //** DONE **\\ 
-14. forbidden route and error page
+14. forbidden route and error page                                                       //** DONE **\\  
 15. admin and manager nav                                                                //** DONE **\\
