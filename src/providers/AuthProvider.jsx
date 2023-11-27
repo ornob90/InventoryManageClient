@@ -13,18 +13,8 @@ import BASE_URL from "../utils/api";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
-  const [shopId, setShopId] = useState("");
-  const [loading, setLoading] = useState(true);
 
-  useState(() => {
-    // console.log(user, shopId);
-    if (user.email) {
-      axios.get(BASE_URL + `/shopID?email=${user.email}`).then((res) => {
-        console.log(res.data);
-        setShopId(res.data.shopID);
-      });
-    }
-  }, [user?.email]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user?.email) {
@@ -60,7 +50,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (curUser) => {
       setUser(curUser);
-
+      setLoading(false);
       if (curUser) {
         const userEmail = curUser?.email;
 
@@ -94,7 +84,7 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     setUser,
-    shopId,
+
     loading,
     signUpMethod,
     signInMethod,

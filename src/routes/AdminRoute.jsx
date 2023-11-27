@@ -6,15 +6,15 @@ import { Navigate } from "react-router-dom";
 
 const AdminRoute = ({ children }) => {
   const { role, loading } = useUser();
-  const { loading: fireBaseLoad } = useAuth();
+  const { user, loading: fireBaseLoad } = useAuth();
 
   if (fireBaseLoad || loading) {
     return <Loading />;
   }
 
-  if (role === "admin") return children;
+  if (user && role && role === "admin") return children;
 
-  <Navigate to="/"></Navigate>;
+  return <Navigate to="/"></Navigate>;
 };
 
 export default AdminRoute;

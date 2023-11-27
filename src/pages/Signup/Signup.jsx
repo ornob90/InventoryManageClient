@@ -77,7 +77,7 @@ const Signup = () => {
         axios.put(BASE_URL + "/user", { email, name }).then((res) => {
           console.log(res.data);
 
-          navigate("/create-user");
+          navigate("/create-shop");
 
           setLoading(false);
           toast.success("You have successfully signed up!");

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../components/html/Input";
 import Button from "../../components/html/Button";
 import { FcGoogle } from "react-icons/fc";
@@ -6,17 +6,42 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/auth/useAuth";
 import toast from "react-hot-toast";
 import useUser from "../../hooks/others/useUser";
+import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 
 const Login = () => {
   const { role } = useUser();
-  const { signInMethod, googleSignInMethod } = useAuth();
-
+  const { user, signInMethod, googleSignInMethod } = useAuth();
+  const [email, setEmail] = useState("");
   const redirectPath = role === "user" ? "/create-shop" : "/dashboard";
 
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const { state } = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (role && role === "user") {
+      navigate("/create-shop");
+    } else if (role) {
+      console.log(role);
+      navigate("/dashboard");
+    }
+  }, [user, user?.email]);
+
+  const axiosPublic = useAxiosPublic();
+  const handleCheckRoleAndNavigate = async (email) => {
+    const response = await axiosPublic(`/user/${email}`);
+    console.log(response.data.role);
+    if (response.data.role === "user") {
+      navigate("/create-shop");
+    } else if (response.data.role === "manager") {
+      navigate("/dashboard/product-manage");
+    } else {
+      navigate("/dashboard/admin/sales-summary");
+    }
+    toast.success("You have successfully signed in!!");
+    setLoading(false);
+  };
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -31,11 +56,7 @@ const Login = () => {
     signInMethod(email, password)
       .then((res) => {
         setErrorMsg("");
-
-        navigate(redirectPath || "/create-shop");
-
-        setLoading(false);
-        toast.success("You have successfully signed in!!");
+        handleCheckRoleAndNavigate(res.user.email);
       })
       .catch((err) => {
         setLoading(false);

@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../../components/shared/Container";
 import ShopForm from "../../components/form/ShopForm";
 import ExistShopForm from "../../components/form/ExistShopForm";
+import useUser from "../../hooks/others/useUser";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const CreateShop = () => {
   const [isCreate, setIsCreate] = useState(true);
 
+  const { role } = useUser();
+  const navigate = useNavigate();
   const handleIsCreate = () => {
     setIsCreate(!isCreate);
   };
+
+  useEffect(() => {
+    if (role !== "user") {
+      toast.error("You already have a shop!!");
+      navigate("/");
+    }
+  }, [role]);
 
   return (
     <div className="min-h-[500px]">

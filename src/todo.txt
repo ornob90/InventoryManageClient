@@ -1,5 +1,5 @@
 1. pagination for every page
-2. payment
+2. payment                                                                               //** DONE **\\
 3. send promotion email
 4. chart
 5. admin and manager route 
@@ -7,7 +7,7 @@
 7. dynamic title
 8. data-aos animation
 9. optional second task
-10. get paid in checkout
+10. get paid in checkout                                                                 //** DONE **\\
 11. generate pdf
 12. navigate to create shop after register                                               //** DONE **\\
 13. navigate to create-shop or home after condition based on have shop or not            //** DONE **\\ 

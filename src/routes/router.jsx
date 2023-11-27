@@ -15,6 +15,10 @@ import AdminManageShop from "../pages/Dashboard/Admin/ManageShop/AdminManageShop
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 import BASE_URL from "../utils/api";
+import PrivateRoute from "../routes/PrivateRoute";
+import ManagerRoute from "./ManagerRoute";
+import SecureRoute from "./SecureRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/create-shop",
-        element: <CreateShop />,
+        element: (
+          <PrivateRoute>
+            <CreateShop />
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -41,44 +49,86 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoute>
+        <SecureRoute>
+          <Dashboard />
+        </SecureRoute>
+      </PrivateRoute>
+    ),
     children: [
       {
-        path: "/dashboard",
-        element: <ProductManage />,
+        path: "/dashboard/product-manage",
+        element: (
+          <ManagerRoute>
+            <ProductManage />
+          </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/sales-collection",
-        element: <SalesCollection />,
+        element: (
+          <ManagerRoute>
+            <SalesCollection />
+          </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/add-product",
-        element: <AddProduct />,
+        element: (
+          <ManagerRoute>
+            <AddProduct />
+          </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/update-product/:id",
-        element: <UpdateProduct />,
+        element: (
+          <ManagerRoute>
+            <UpdateProduct />
+          </ManagerRoute>
+        ),
         loader: ({ params }) => fetch(BASE_URL + `/product/${params.id}`),
       },
       {
         path: "/dashboard/checkout",
-        element: <Checkout />,
+        element: (
+          <ManagerRoute>
+            <Checkout />
+          </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/subscription",
-        element: <Subscription />,
+        element: (
+          <ManagerRoute>
+            <Subscription />
+          </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/sales-summary",
-        element: <SalesSummary />,
+        element: (
+          <ManagerRoute>
+            <SalesSummary />
+          </ManagerRoute>
+        ),
       },
       {
         path: "/dashboard/admin/sales-summary",
-        element: <AdminSalesSummary />,
+        element: (
+          <AdminRoute>
+            <AdminSalesSummary />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/admin/manage-shop",
-        element: <AdminManageShop />,
+        element: (
+          <AdminRoute>
+            <AdminManageShop />
+          </AdminRoute>
+        ),
       },
     ],
   },

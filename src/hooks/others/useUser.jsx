@@ -17,7 +17,8 @@ const useUser = () => {
           setCurUser(res.data);
           setLoading(false);
         })
-        .catch((err) => setLoading(false));
+        .catch((err) => setLoading(false))
+        .finally(() => setLoading(false));
     }
   }, [user, user?.email]);
 

@@ -76,6 +76,21 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
+        {!user && (
+          <NavLink
+            onClick={() => setHidden(!hidden)}
+            to="/create-shop"
+            className={({ isActive }) =>
+              isActive
+                ? "dark:text-dark-mode dark:bg-dark-text font-medium bg-primary text-white py-2 px-3 rounded-sm"
+                : "font-medium dark:text-dark-text"
+            }
+          >
+            Create Shop
+          </NavLink>
+        )}
+      </li>
+      <li>
         {role === "user" && (
           <NavLink
             onClick={() => setHidden(!hidden)}
@@ -92,10 +107,14 @@ const Navbar = () => {
       </li>
 
       <li>
-        {role !== "user" && (
+        {user && role !== "user" && (
           <NavLink
             onClick={() => setHidden(!hidden)}
-            to="/dashboard"
+            to={
+              role === "manager"
+                ? "/dashboard/product-manage"
+                : "/dashboard/admin/sales-summary"
+            }
             className={({ isActive }) =>
               isActive
                 ? "dark:text-dark-mode dark:bg-dark-text font-medium bg-primary text-white py-2 px-3 rounded-sm"
@@ -146,7 +165,7 @@ const Navbar = () => {
         // console.log("Signed Out");
 
         toast.success("You have been logged out!!");
-        navigate("/");
+        navigate("/login");
       })
       .catch((err) => console.log(err.message));
   };

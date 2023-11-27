@@ -4,7 +4,7 @@ import useAuth from "../hooks/auth/useAuth";
 import Loading from "../pages/Loading/Loading";
 import { Navigate } from "react-router-dom";
 
-const ManagerRoute = ({ children }) => {
+const SecureRoute = ({ children }) => {
   const { role, loading: managerLoad } = useUser();
 
   const { user, loading } = useAuth();
@@ -12,12 +12,14 @@ const ManagerRoute = ({ children }) => {
   console.log(loading, managerLoad);
   if (loading || managerLoad) {
     return <Loading />;
-  } else if (user && role && role === "manager") {
+  } else if (user && role && role !== "user") {
+    console.log(role);
     return children;
   }
-  console.log(role);
+  //   window.location.href = "/";
 
   return <Navigate to="/"></Navigate>;
+  //   return <></>;
 };
 
-export default ManagerRoute;
+export default SecureRoute;
