@@ -4,18 +4,32 @@ import useGetSecure from "../../../../hooks/apiSecure/useGetSecure";
 
 import { data } from "autoprefixer";
 import Pagination from "../../../../components/shared/Pagination";
+import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
 
 const UserTale = () => {
-  const { data: users } = useGetSecure(["AllUsers"], "/users");
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(1);
+  const [size, setSize] = useState(10);
+  const [users, setUsers] = useState([]);
+
+  const { data: count } = useGetSecure(["UserCount"], `/user-count`);
+  const axiosSecure = useAxiosSecure();
+  useEffect(() => {
+    axiosSecure
+      .get(`/users?page=${page}&size=${size}`)
+      .then((res) => setUsers(res?.data));
+  }, [page, size]);
+
+  // const { data: users } = useGetSecure(
+  //   ["AllUsers"],
+  //   `/users?page=${page}&size=${size}`
+  // );
   const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
-    setPageCount(Math.ceil(users?.length / size));
-
-    console.log(data?.length);
-  }, [users, size]);
+    if (count?.userCount) setPageCount(Math.ceil(count?.userCount / size));
+    // console.log(count);
+    // console.log(data?.length);
+  }, [count, size]);
 
   return (
     <div className="mt-10 overflow-x-auto min-h-[300px]">
@@ -53,6 +67,7 @@ const UserTale = () => {
         pageCount={pageCount}
         page={page}
         setSize={setSize}
+        size={size}
       />
     </div>
   );
