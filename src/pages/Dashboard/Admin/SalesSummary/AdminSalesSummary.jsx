@@ -12,7 +12,6 @@ import { FaHandHoldingUsd } from "react-icons/fa";
 
 const AdminSalesSummary = () => {
   const { user, loading } = useAuth();
-  const [page, setPage] = useState(0);
 
   // const { data } = useGetSecure(
   //   ["ManagerStates"],
@@ -60,7 +59,6 @@ const AdminSalesSummary = () => {
     <ShortContainer className="min-h-[500px]">
       <SalesCount salesCount={salesCount} />
       <UserTale />
-      <Pagination setPage={setPage} page={page} />
     </ShortContainer>
   );
 };

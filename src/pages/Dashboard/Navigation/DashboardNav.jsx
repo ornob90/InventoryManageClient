@@ -44,7 +44,8 @@ const DashboardNav = () => {
     {
       name: "Sales Summary",
       slug: "/dashboard/admin/sales-summary",
-      show: role === "admin",
+      // show: role === "admin",
+      show: true,
     },
   ];
 

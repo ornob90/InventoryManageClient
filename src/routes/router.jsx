@@ -116,11 +116,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin/sales-summary",
-        element: (
-          <AdminRoute>
-            <AdminSalesSummary />
-          </AdminRoute>
-        ),
+        element: <AdminSalesSummary />,
       },
       {
         path: "/dashboard/admin/manage-shop",

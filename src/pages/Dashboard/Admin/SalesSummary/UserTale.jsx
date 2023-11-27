@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../../../components/html/Button";
 import useGetSecure from "../../../../hooks/apiSecure/useGetSecure";
 
+import { data } from "autoprefixer";
+import Pagination from "../../../../components/shared/Pagination";
+
 const UserTale = () => {
   const { data: users } = useGetSecure(["AllUsers"], "/users");
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(1);
+  const [pageCount, setPageCount] = useState(1);
+
+  useEffect(() => {
+    setPageCount(Math.ceil(users?.length / size));
+
+    console.log(data?.length);
+  }, [users, size]);
 
   return (
     <div className="mt-10 overflow-x-auto min-h-[300px]">
@@ -36,6 +48,12 @@ const UserTale = () => {
           ))}
         </tbody>
       </table>
+      <Pagination
+        setPage={setPage}
+        pageCount={pageCount}
+        page={page}
+        setSize={setSize}
+      />
     </div>
   );
 };

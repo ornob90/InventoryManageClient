@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Pagination = ({ setPage, setSize, page, pageCount }) => {
   return (
-    <div className="flex justify-center items-center gap-4 mt-4 flex-wrap">
+    <div className="w-full  flex justify-center items-center gap-4 mt-4 flex-wrap">
       {[...Array(pageCount).keys()].map((value) => (
         <div
           key={value}
@@ -19,7 +19,7 @@ const Pagination = ({ setPage, setSize, page, pageCount }) => {
         className="border border-primary py-1 focus:border-primary"
       >
         <option value="1">1</option>
-        <option value="2">2</option>
+        <option value="10">10</option>
         <option value="30">30</option>
       </select>
     </div>
