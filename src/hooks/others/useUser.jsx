@@ -6,16 +6,22 @@ const useUser = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [curUser, setCurUser] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     if (user?.email) {
-      axiosPublic.get(`/user/${user.email}`).then((res) => {
-        setCurUser(res.data);
-      });
+      axiosPublic
+        .get(`/user/${user.email}`)
+        .then((res) => {
+          setCurUser(res.data);
+          setLoading(false);
+        })
+        .catch((err) => setLoading(false));
     }
   }, [user, user?.email]);
 
-  return curUser;
+  return { ...curUser, loading };
 };
 
 export default useUser;

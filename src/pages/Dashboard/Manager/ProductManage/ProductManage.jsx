@@ -10,7 +10,7 @@ const ProductManage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { data: products, isLoading } = useGetSecure(
-    [["products", user?.email]],
+    ["products", user?.email],
     `/products/${user?.email}`
   );
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ShortContainer from "../../../../components/shared/ShortContainer";
 import SalesCount from "./SalesCount";
 import SalesHistory from "./SalesHistory";
