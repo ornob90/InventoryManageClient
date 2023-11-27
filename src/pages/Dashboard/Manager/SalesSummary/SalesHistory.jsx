@@ -5,7 +5,7 @@ import useAuth from "../../../../hooks/auth/useAuth";
 import getDate from "../../../../utils/getDate";
 import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
 
-const SalesHistory = ({ page, size, pageCount, setPageCount }) => {
+const SalesHistory = ({ page, size, setPageCount }) => {
   const { user } = useAuth() || {};
   // const { data: salesProduct } = useGetSecure(
   //   ["SalesHistoryManager"],
@@ -17,9 +17,17 @@ const SalesHistory = ({ page, size, pageCount, setPageCount }) => {
 
   const axiosSecure = useAxiosSecure();
 
+  const { data } = useGetSecure(
+    ["SaleHistoryCount"],
+    `/manager-sales-history-count?email=${user?.email}`
+  );
+
   useEffect(() => {
-    setPageCount(Math.ceil(salesProduct?.length / size));
-  }, [size]);
+    // console.log(data?.totalCount);
+    setPageCount(Math.ceil(data?.totalCount / size));
+  }, [data, size]);
+
+  // setPageCount(2);
 
   useEffect(() => {
     axiosSecure
@@ -28,9 +36,8 @@ const SalesHistory = ({ page, size, pageCount, setPageCount }) => {
       )
       .then((res) => {
         setSalesProduct(res?.data);
-        setPageCount(Math.ceil(res?.data?.length / size));
       });
-  }, [user, user?.email]);
+  }, [user, user?.email, page, size]);
 
   return (
     <div className="mt-10 overflow-x-auto min-h-[300px]">

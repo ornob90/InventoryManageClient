@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 const Pagination = ({ setPage, setSize, page, pageCount, size }) => {
+  console.log(pageCount);
   return (
     <div className="w-full  flex justify-center items-center gap-4 mt-4 flex-wrap">
       {[...Array(pageCount).keys()].map((value) => (
