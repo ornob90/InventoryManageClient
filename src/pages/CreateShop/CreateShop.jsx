@@ -16,7 +16,8 @@ const CreateShop = () => {
   };
 
   useEffect(() => {
-    if (role !== "user") {
+    console.log(role);
+    if (role && role !== "user") {
       toast.error("You already have a shop!!");
       navigate("/");
     }

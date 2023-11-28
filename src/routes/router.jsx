@@ -21,6 +21,7 @@ import SecureRoute from "./SecureRoute";
 import AdminRoute from "./AdminRoute";
 import Error from "../pages/Error/Error";
 import Forbidden from "../pages/Forbidden/Forbidden";
+import ShareShop from "../pages/Dashboard/Manager/ShareShop/ShareShop";
 
 const router = createBrowserRouter([
   {
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
         </SecureRoute>
       </PrivateRoute>
     ),
-    errorElement: <Error />,
+    // errorElement: <Error />,
     children: [
       {
         path: "/dashboard/product-manage",
@@ -121,6 +122,14 @@ const router = createBrowserRouter([
         element: (
           <ManagerRoute>
             <SalesSummary />
+          </ManagerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/share-shop",
+        element: (
+          <ManagerRoute>
+            <ShareShop />
           </ManagerRoute>
         ),
       },

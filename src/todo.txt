@@ -13,3 +13,5 @@
 13. navigate to create-shop or home after condition based on have shop or not            //** DONE **\\ 
 14. forbidden route and error page                                                       //** DONE **\\  
 15. admin and manager nav                                                                //** DONE **\\
+16. Watch Video
+17. remove pic from login and sign up

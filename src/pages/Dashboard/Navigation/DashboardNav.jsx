@@ -37,6 +37,11 @@ const DashboardNav = () => {
       show: role === "manager",
     },
     {
+      name: "Share Shop",
+      slug: "/dashboard/share-shop",
+      show: role === "manager",
+    },
+    {
       name: "Manage Shop",
       slug: "/dashboard/admin/manage-shop",
       show: role === "admin",
