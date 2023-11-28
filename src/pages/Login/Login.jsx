@@ -7,6 +7,8 @@ import useAuth from "../../hooks/auth/useAuth";
 import toast from "react-hot-toast";
 import useUser from "../../hooks/others/useUser";
 import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
+import BASE_URL from "../../utils/api";
+import axios from "axios";
 
 const Login = () => {
   const { role } = useUser();
@@ -29,6 +31,7 @@ const Login = () => {
   }, [user, user?.email]);
 
   const axiosPublic = useAxiosPublic();
+
   const handleCheckRoleAndNavigate = async (email) => {
     const response = await axiosPublic(`/user/${email}`);
     console.log(response.data.role);
@@ -65,24 +68,39 @@ const Login = () => {
       });
   };
 
-  return (
-    <div className="h-screen min-h-[500px] w-[95%] mx-auto grid  grid-cols-1 lg:grid-cols-2">
-      <div className="hidden lg:block  my-[2.5%] min-h-[500px] bg-login relative">
-        <p className="text-lg font-clashBold sm:text-xl absolute top-[2%] left-[5%] underline  cursor-pointer text-white">
-          ShoeSphere
-        </p>
+  const handleGoogleSignIn = () => {
+    setLoading(true);
 
-        <div className="absolute w-full bottom-[10%] left-[5%] text-white">
-          <h2 className="text-4xl">
-            Buckle Up! <br /> Your Shoe Journey Starts Here
-          </h2>
-          <p className="text-sm text-gray-300 mt-2 w-[88%]">
-            Strap in for a personalized shoe experience. Sign in to discover
-            curated collections and exclusive styles just for you
-          </p>
-        </div>
-      </div>
-      {/* Login Part */}
+    googleSignInMethod()
+      .then((res) => {
+        setErrorMsg("");
+
+        const { email, displayName } = res.user;
+        // console.log(email, displayName, res.user);
+
+        axios
+          .put(BASE_URL + "/user", { email, name: displayName })
+          .then((res) => {
+            console.log(res.data);
+
+            handleCheckRoleAndNavigate(email);
+
+            setLoading(false);
+
+            if (res.data.insertOne)
+              toast.success("You have successfully signed in!!");
+            else toast.success("User Exist!!");
+          });
+      })
+      .catch((err) => {
+        setLoading(false);
+        setErrorMsg(err.message);
+        console.log(err);
+      });
+  };
+
+  return (
+    <div className="h-screen min-h-[500px] w-[95%] md:w-[70%] lg:w-[60%] mx-auto flex  justify-center items-center">
       <div className="w-[80%] lg:w-[70%] mx-auto my-[2.5%]  flex flex-col justify-center items-center h-auto">
         <h1 className="text-2xl font-clashBold md:text-3xl">Welcome back!</h1>
         <form
@@ -115,7 +133,10 @@ const Login = () => {
             Sign Up
           </span>
         </p>
-        <div className="flex items-center justify-center w-full gap-2 py-2 text-sm duration-300 border cursor-pointer active:scale-95 md:text-base">
+        <div
+          onClick={handleGoogleSignIn}
+          className="flex items-center justify-center w-full gap-2 py-2 text-sm duration-300 border cursor-pointer active:scale-95 md:text-base"
+        >
           <FcGoogle />
           <p>Continue Wih Google</p>
         </div>

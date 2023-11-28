@@ -10,6 +10,7 @@ import auth, { googleProvider } from "../firebase/firebase.config";
 import AuthContext from "../contexts/AuthContext";
 import axios from "axios";
 import BASE_URL from "../utils/api";
+import toast from "react-hot-toast";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
@@ -56,13 +57,15 @@ const AuthProvider = ({ children }) => {
 
         const loggedUser = { email: userEmail };
 
-        // axios.post(BASE_URL + "/jwt", loggedUser).then((res) => {
-        //   if (res?.data?.token) {
-        //     console.log("token response", res.data.token);
-        //     localStorage.setItem("token", res.data.token);
-        //     setLoading(false);
-        //   }
-        // });
+        axios.post(BASE_URL + "/jwt", loggedUser).then((res) => {
+          if (res?.data?.token) {
+            console.log("token response", res.data.token);
+            localStorage.setItem("token", res.data.token);
+            setLoading(false);
+          } else {
+            toast.error("Couldn't set token!!");
+          }
+        });
       } else {
         // axios
         //   .post(BASE_URL + "/logout", loggedUser, {

@@ -9,6 +9,7 @@ import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
 import { GoGraph } from "react-icons/go";
 import { FaMoneyBillTrendUp } from "react-icons/fa6";
 import { FaHandHoldingUsd } from "react-icons/fa";
+import CustomBarChart from "../../../../components/shared/CustomBarChart";
 
 const AdminSalesSummary = () => {
   const { user, loading } = useAuth();
@@ -59,6 +60,7 @@ const AdminSalesSummary = () => {
     <ShortContainer className="min-h-[500px]">
       <SalesCount salesCount={salesCount} />
       <UserTale />
+      <CustomBarChart salesCount={salesCount} />
     </ShortContainer>
   );
 };

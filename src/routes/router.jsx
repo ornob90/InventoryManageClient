@@ -22,6 +22,7 @@ import AdminRoute from "./AdminRoute";
 import Error from "../pages/Error/Error";
 import Forbidden from "../pages/Forbidden/Forbidden";
 import ShareShop from "../pages/Dashboard/Manager/ShareShop/ShareShop";
+import WatchVideo from "../pages/WatchVideo/WatchVideo";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/watch-video",
+        element: <WatchVideo />,
       },
       {
         path: "/create-shop",
@@ -135,11 +140,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin/sales-summary",
-        element: (
-          <AdminRoute>
-            <AdminSalesSummary />
-          </AdminRoute>
-        ),
+        element: <AdminSalesSummary />,
       },
       {
         path: "/dashboard/admin/manage-shop",

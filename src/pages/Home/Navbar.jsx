@@ -128,14 +128,14 @@ const Navbar = () => {
       <li>
         <NavLink
           onClick={() => setHidden(!hidden)}
-          to="/borrowed"
+          to="/watch-video"
           className={({ isActive }) =>
             isActive
               ? "dark:text-dark-mode dark:bg-dark-text font-medium bg-primary text-white py-2 px-3 rounded-sm"
               : "font-medium dark:text-dark-text"
           }
         >
-          Borrowed
+          Watch Demo
         </NavLink>
       </li>
     </>

@@ -3,13 +3,15 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import useDeleteSecure from "../../../../hooks/apiSecure/useDeleteSecure";
+// import useDeleteSecure from "../../../../hooks/apiSecure/useDeleteSecure";
+// import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
+import BASE_URL from "../../../../utils/api";
 
 const CheckoutTable = ({ cartProducts }) => {
   console.log(cartProducts);
 
-  const { mutateAsync: deleteProduct } = useDeleteSecure([["Cart"]]);
-
+  // const { mutateAsync: deleteProduct } = useDeleteSecure([["Cart"]]);
+  // const axiosSecure = useAxiosSecure();
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -21,7 +23,9 @@ const CheckoutTable = ({ cartProducts }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteProduct(`/cart/${id}`).then((res) => console.log(res));
+        // deleteProduct(`/cart/${id}`).then((res) => console.log(res));
+
+        axios.delete(BASE_URL + `/cart/${id}`).then((res) => console.log(res));
         // console.log(id, product?._id, product);
       }
     });

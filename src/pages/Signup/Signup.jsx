@@ -91,21 +91,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="h-screen min-h-[500px] w-[95%] mx-auto grid  grid-cols-1 lg:grid-cols-2">
-      <div className="hidden lg:block  my-[2.5%] min-h-[500px] bg-signup relative">
-        <p className="text-lg font-clashBold sm:text-xl absolute top-[2%] left-[5%] underline  cursor-pointer text-white">
-          ShoeSphere
-        </p>
-
-        <div className="absolute w-full bottom-[10%] left-[5%] text-white">
-          <h2 className="text-4xl">Ready to Elevate Your Style?</h2>
-          <p className="text-sm text-gray-300 mt-4 w-[88%]">
-            Join us for exclusive styles, insider perks, and a personalized
-            fashion journey. Elevate your wardrobe.
-          </p>
-        </div>
-      </div>
-      {/* Login Part */}
+    <div className="h-screen min-h-[500px] w-[95%] md:w-[70%] lg:w-[60%] mx-auto flex  justify-center items-center">
       <div className="w-[80%] lg:w-[70%] mx-auto my-[2.5%]  flex flex-col justify-center items-center h-auto">
         <h1 className="text-2xl font-clashBold md:text-3xl">Join us today!</h1>
         <form

@@ -16,12 +16,12 @@ const Forbidden = () => {
           You are not authorized to view this page! Hope you'll have a good
           experience in other accessible routes!
         </p>
-        <Button
+        <button
           onClick={() => navigate("/")}
-          className="bg-white text-[#000000]  py-2 px-4   duration-[.3s] text-sm lg:text-base border border-black  "
+          className="active:scale-95 duration-[.4s] bg-white text-black  py-2 px-4   duration-[.3s] text-sm lg:text-base border border-black  "
         >
           GO TO HOMEPAGE
-        </Button>
+        </button>
       </div>
     </div>
   );

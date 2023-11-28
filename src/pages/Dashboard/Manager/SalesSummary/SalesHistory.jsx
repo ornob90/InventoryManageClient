@@ -24,7 +24,8 @@ const SalesHistory = ({ page, size, setPageCount }) => {
 
   useEffect(() => {
     // console.log(data?.totalCount);
-    setPageCount(Math.ceil(data?.totalCount / size));
+    console.log(data?.totalCount);
+    if (data?.totalCount) setPageCount(Math.ceil(data?.totalCount / size));
   }, [data, size]);
 
   // setPageCount(2);

@@ -1,12 +1,12 @@
 1. pagination for every page                                                             //** DONE **\\
 2. payment                                                                               //** DONE **\\
-3. send promotion email
-4. chart
+3. send promotion email                                                                  //** DONE **\\
+4. chart                                                                                 //** DONE **\\
 5. admin and manager route                                                               //** DONE **\\
-6. jwt verify for manager and admin
+6. jwt verify for manager and admin                                                      //** DONE **\\
 7. dynamic title                                                                         //** DONE **\\
 8. data-aos animation                                                                    //** DONE **\\
-9. optional second task
+9. optional second task                                                                  //** DONE **\\
 10. get paid in checkout                                                                 //** DONE **\\
 11. generate pdf
 12. navigate to create shop after register                                               //** DONE **\\
@@ -14,4 +14,9 @@
 14. forbidden route and error page                                                       //** DONE **\\  
 15. admin and manager nav                                                                //** DONE **\\
 16. Watch Video
-17. remove pic from login and sign up
+17. remove pic from login and sign up                                                    //** DONE **\\
+18. google sign r jonno user add                                                         //** DONE **\\
+19. add coupon in product
+20. user shop wise send button show kora in user table                                   //** DONE **\\
+21. sort by use sales
+22. token set in localhost                                                               //** DONE **\\ 
