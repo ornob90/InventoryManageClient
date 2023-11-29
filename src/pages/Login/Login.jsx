@@ -6,13 +6,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/auth/useAuth";
 import toast from "react-hot-toast";
 import useUser from "../../hooks/others/useUser";
-import useAxiosPublic from "../../hooks/axios/useAxiosPublic";
 import BASE_URL from "../../utils/api";
 import axios from "axios";
+import useAxiosSecure from "../../hooks/axios/useAxiosSecure";
 
 const Login = () => {
   const { role } = useUser();
-  const { user, signInMethod, googleSignInMethod } = useAuth();
+  const {
+    user,
+    signInMethod,
+    googleSignInMethod,
+    loading: authLoading,
+  } = useAuth();
   const [email, setEmail] = useState("");
   const redirectPath = role === "user" ? "/create-shop" : "/dashboard";
 
@@ -28,12 +33,12 @@ const Login = () => {
       console.log(role);
       navigate("/dashboard");
     }
-  }, [user, user?.email]);
+  }, [user, user?.email, role]);
 
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const handleCheckRoleAndNavigate = async (email) => {
-    const response = await axiosPublic(`/user/${email}`);
+    const response = await axiosSecure(`/user/${email}`);
     console.log(response.data.role);
     if (response.data.role === "user") {
       navigate("/create-shop");
@@ -59,7 +64,7 @@ const Login = () => {
     signInMethod(email, password)
       .then((res) => {
         setErrorMsg("");
-        handleCheckRoleAndNavigate(res.user.email);
+        // handleCheckRoleAndNavigate(res.user.email);
       })
       .catch((err) => {
         setLoading(false);

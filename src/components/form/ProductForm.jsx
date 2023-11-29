@@ -21,6 +21,8 @@ const ProductForm = ({ method, product }) => {
     profitMargin,
     discount,
     productDescription,
+    couponCode,
+    couponExpire,
   } = product || {};
 
   const [productImage, setProductImage] = useState("");
@@ -48,7 +50,11 @@ const ProductForm = ({ method, product }) => {
     profitMargin: profitMargin || "",
     discount: discount || "",
     productDescription: productDescription || "",
+    // couponCode: couponExpire || "",
+    // couponExpire: couponExpire || "",
   });
+
+  console.log(productInfo);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -166,6 +172,29 @@ const ProductForm = ({ method, product }) => {
         rows={3}
         className="md:col-span-6"
       />
+
+      {method === "post" && (
+        <>
+          <Input
+            onChange={handleChange}
+            value={productInfo.couponCode}
+            // onChange={handleChange}
+            placeholder="Coupon Code"
+            name="couponCode"
+            type="text"
+            className="md:col-span-3"
+          />
+          <Input
+            onChange={handleChange}
+            value={productInfo.couponExpire}
+            placeholder="Coupon Expires"
+            name="couponExpire"
+            type="date"
+            className="md:col-span-3"
+          />
+        </>
+      )}
+
       <Upload
         placeHolder="Upload Image"
         setImage={setProductImage}

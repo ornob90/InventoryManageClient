@@ -7,13 +7,14 @@ import useUser from "../hooks/others/useUser";
 const Dashboard = () => {
   const { role } = useUser();
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (role === "manager") {
-  //     navigate("/dashboard/product-manage");
-  //   } else {
-  //     navigate("/dashboard/admin/sales-summary");
-  //   }
-  // }, [role]);
+
+  useEffect(() => {
+    if (role === "manager") {
+      navigate("/dashboard/product-manage");
+    } else {
+      navigate("/dashboard/admin/sales-summary");
+    }
+  }, [role]);
 
   const { pathname } = useLocation();
   useEffect(() => {

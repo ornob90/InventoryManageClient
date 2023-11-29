@@ -3,6 +3,7 @@ import ShortContainer from "../../../../components/shared/ShortContainer";
 import { MdDelete } from "react-icons/md";
 import Button from "../../../../components/html/Button";
 import useGetSecure from "../../../../hooks/apiSecure/useGetSecure";
+import MailModal from "../../../../components/shared/MailModal";
 
 const AdminManageShop = () => {
   const { data: shops } = useGetSecure(["AllShops"], `/shops`);
@@ -42,9 +43,15 @@ const AdminManageShop = () => {
                 <td>{shop?.productLimit}</td>
                 <td>{shop?.shopDescription}</td>
                 <td className="flex items-center h-full gap-2 pt-5 text-3xl">
-                  <Button className="text-[12px] py-0 px-3 bg-red-600">
+                  <Button
+                    onClick={() =>
+                      document.getElementById("my_modal_1").showModal()
+                    }
+                    className="text-[12px] py-0 px-3 bg-red-600"
+                  >
                     Send
                   </Button>
+                  <MailModal email={shop?.shopOwnerEmail} />
                 </td>
               </tr>
             ))}

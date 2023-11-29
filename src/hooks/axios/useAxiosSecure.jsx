@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+
 import { useNavigate } from "react-router-dom";
 import BASE_URL from "../../utils/api";
 import useAuth from "../auth/useAuth";
@@ -17,7 +17,7 @@ const useAxiosSecure = () => {
     function (config) {
       const token = localStorage.getItem("token");
 
-      config.headers.authorization = token;
+      config.headers.authorization = "Bearer " + token;
       return config;
     },
     function (error) {
@@ -30,7 +30,7 @@ const useAxiosSecure = () => {
       return res;
     },
     async function (err) {
-      const status = err.response.status;
+      const status = err.response?.status;
 
       if (status === 401 || status === 403) {
         await logout();

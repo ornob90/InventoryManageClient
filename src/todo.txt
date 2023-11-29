@@ -13,10 +13,12 @@
 13. navigate to create-shop or home after condition based on have shop or not            //** DONE **\\ 
 14. forbidden route and error page                                                       //** DONE **\\  
 15. admin and manager nav                                                                //** DONE **\\
-16. Watch Video
+16. Watch Video                                                                          //** DONE **\\
 17. remove pic from login and sign up                                                    //** DONE **\\
 18. google sign r jonno user add                                                         //** DONE **\\
-19. add coupon in product
+19. add coupon in product                                                                //** DONE **\\
 20. user shop wise send button show kora in user table                                   //** DONE **\\
-21. sort by use sales
+21. sort by use sales                                                                    //** DONE **\\ 
 22. token set in localhost                                                               //** DONE **\\ 
+23. shop admin email and name show in create-shop form                                   //** DONE **\\ 
+24. redirect subscription page if product limit 0                                        //** DONE **\\ 

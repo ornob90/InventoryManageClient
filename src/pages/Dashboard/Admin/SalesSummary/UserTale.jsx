@@ -8,19 +8,26 @@ import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
 import emailjs from "@emailjs/browser";
 import Input from "../../../../components/html/Input";
 import toast from "react-hot-toast";
+import MailModal from "../../../../components/shared/MailModal";
 
 const UserTale = () => {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const { data: count } = useGetSecure(["UserCount"], `/user-count`);
-  const axiosSecure = useAxiosSecure();
-  useEffect(() => {
-    axiosSecure
-      .get(`/users?page=${page}&size=${size}`)
-      .then((res) => setUsers(res?.data));
-  }, [page, size]);
+  const { data: users } = useGetSecure(
+    ["AllUsers"],
+    `/users?page=${page}&size=${size}`
+  );
+
+  // const axiosSecure = useAxiosSecure();
+  // useEffect(() => {
+  //   axiosSecure
+  //     .get(`/users?page=${page}&size=${size}`)
+  //     .then((res) => setUsers(res?.data));
+  // }, [page, size]);
 
   // const { data: users } = useGetSecure(
   //   ["AllUsers"],
@@ -83,12 +90,16 @@ const UserTale = () => {
               <td className="flex items-center h-full gap-2 pt-5 text-3xl">
                 {!user?.shopName && user?.role !== "admin" && (
                   <Button
-                    onClick={() => handleSendEmail(user?.email)}
+                    onClick={() => {
+                      // handleSendEmail(user?.email);
+                      document.getElementById("my_modal_1").showModal();
+                    }}
                     className="text-[12px] py-0 px-3 bg-red-600"
                   >
                     Send
                   </Button>
                 )}
+                <MailModal email={user?.email} />
               </td>
             </tr>
           ))}

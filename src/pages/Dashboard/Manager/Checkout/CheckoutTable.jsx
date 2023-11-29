@@ -6,11 +6,13 @@ import Swal from "sweetalert2";
 // import useDeleteSecure from "../../../../hooks/apiSecure/useDeleteSecure";
 // import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
 import BASE_URL from "../../../../utils/api";
+import axios from "axios";
+import useDeleteSecure from "../../../../hooks/apiSecure/useDeleteSecure";
 
 const CheckoutTable = ({ cartProducts }) => {
-  console.log(cartProducts);
+  // console.log(cartProducts);
 
-  // const { mutateAsync: deleteProduct } = useDeleteSecure([["Cart"]]);
+  const { mutateAsync: deleteProduct } = useDeleteSecure([["Cart"]]);
   // const axiosSecure = useAxiosSecure();
   const handleDelete = (id) => {
     Swal.fire({
@@ -23,9 +25,9 @@ const CheckoutTable = ({ cartProducts }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // deleteProduct(`/cart/${id}`).then((res) => console.log(res));
+        deleteProduct(`/cart/${id}`).then((res) => console.log(res));
 
-        axios.delete(BASE_URL + `/cart/${id}`).then((res) => console.log(res));
+        // axios.delete(BASE_URL + `/cart/${id}`).then((res) => console.log(res));
         // console.log(id, product?._id, product);
       }
     });

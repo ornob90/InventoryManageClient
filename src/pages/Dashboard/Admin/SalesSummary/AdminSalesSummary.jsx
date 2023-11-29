@@ -18,7 +18,7 @@ const AdminSalesSummary = () => {
   //   ["ManagerStates"],
   //   `/manager-sales-summary?email=${user?.email}`
   // );
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
   // const { data } = useQuery({
   //   queryKey: ["ManageStates"],
   //   queryFn: async () => {
@@ -29,13 +29,18 @@ const AdminSalesSummary = () => {
   //   },
   // });
 
-  const [data, setData] = useState([]);
+  const { data } = useGetSecure(
+    ["ManageStates"],
+    `/admin-sales-summary?email=${user?.email}`
+  );
 
-  useEffect(() => {
-    axiosSecure.get(`/admin-sales-summary`).then((res) => {
-      setData(res?.data);
-    });
-  }, [user, user?.email]);
+  // const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   axiosSecure.get(`/admin-sales-summary`).then((res) => {
+  //     setData(res?.data);
+  //   });
+  // }, [user, user?.email]);
 
   // console.log(data);
   const salesCount = [

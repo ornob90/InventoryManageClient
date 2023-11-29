@@ -59,10 +59,11 @@ const AuthProvider = ({ children }) => {
 
         axios.post(BASE_URL + "/jwt", loggedUser).then((res) => {
           if (res?.data?.token) {
-            console.log("token response", res.data.token);
+            // console.log("token response", res.data.token);
             localStorage.setItem("token", res.data.token);
             setLoading(false);
           } else {
+            setLoading(false);
             toast.error("Couldn't set token!!");
           }
         });
