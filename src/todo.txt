@@ -22,3 +22,4 @@
 22. token set in localhost                                                               //** DONE **\\ 
 23. shop admin email and name show in create-shop form                                   //** DONE **\\ 
 24. redirect subscription page if product limit 0                                        //** DONE **\\ 
+25. update product

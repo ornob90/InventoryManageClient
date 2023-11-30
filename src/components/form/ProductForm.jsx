@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../html/Input";
 import TextArea from "../html/TextArea";
 import Upload from "../html/Upload";
@@ -11,6 +11,7 @@ import useShop from "../../hooks/data/useShop";
 import usePutSecure from "../../hooks/apiSecure/usePutSecure";
 
 const ProductForm = ({ method, product }) => {
+  console.log(product);
   const {
     _id,
     productName,
@@ -42,17 +43,32 @@ const ProductForm = ({ method, product }) => {
     `/product/${product?._id}`
   );
 
-  const [productInfo, setProductInfo] = useState({
-    productName: productName || "",
-    productQuantity: productQuantity || "",
-    productLocation: productLocation || "",
-    productionCost: productionCost || "",
-    profitMargin: profitMargin || "",
-    discount: discount || "",
-    productDescription: productDescription || "",
-    // couponCode: couponExpire || "",
-    // couponExpire: couponExpire || "",
-  });
+  // const [productInfo, setProductInfo] = useState({
+  //   productName: productName || "",
+  //   productQuantity: productQuantity || "",
+  //   productLocation: productLocation || "",
+  //   productionCost: productionCost || "",
+  //   profitMargin: profitMargin || "",
+  //   discount: discount || "",
+  //   productDescription: productDescription || "",
+  //   // couponCode: couponExpire || "",
+  //   // couponExpire: couponExpire || "",
+  // });
+  const [productInfo, setProductInfo] = useState({});
+
+  useEffect(() => {
+    setProductInfo({
+      productName: product?.productName || "",
+      productQuantity: product?.productQuantity || "",
+      productLocation: product?.productLocation || "",
+      productionCost: product?.productionCost || "",
+      profitMargin: product?.profitMargin || "",
+      discount: product?.discount || "",
+      productDescription: product?.productDescription || "",
+      // couponCode: couponExpire || "",
+      // couponExpire: couponExpire || "",
+    });
+  }, [product]);
 
   console.log(productInfo);
 

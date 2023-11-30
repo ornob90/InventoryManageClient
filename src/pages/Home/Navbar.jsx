@@ -6,6 +6,7 @@ import AuthContext from "../../contexts/AuthContext";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import toast from "react-hot-toast";
 import useUser from "../../hooks/others/useUser";
+import Loading from "../Loading/Loading";
 
 // import useGet from "../../hooks/useGet";
 // import useAdmin from "../../hooks/useAdmin";
@@ -44,7 +45,7 @@ const Navbar = () => {
   const [hidden, setHidden] = useState(false);
 
   const navigate = useNavigate();
-  const { user, signOutMethod } = useAuth();
+  const { user, signOutMethod, loading: authLoading } = useAuth();
   // console.log(user?.photoURL);
 
   //   const { validAdmin } = useAdmin();
@@ -113,7 +114,9 @@ const Navbar = () => {
             to={
               role === "manager"
                 ? "/dashboard/product-manage"
-                : "/dashboard/admin/sales-summary"
+                : role === "admin"
+                ? "/dashboard/admin/sales-summary"
+                : "/forbidden"
             }
             className={({ isActive }) =>
               isActive
@@ -169,6 +172,8 @@ const Navbar = () => {
       })
       .catch((err) => console.log(err.message));
   };
+
+  if (authLoading) return <Loading />;
 
   return (
     <nav
@@ -318,19 +323,6 @@ const Navbar = () => {
             >
               Sign UP
             </Button>
-            <div className="w-[30px] md:w-[50px] hidden md:block">
-              {theme === "dark" ? (
-                <BsFillSunFill
-                  className="text-xl text-white sm:text-2xl md:text-3xl"
-                  //   onClick={handleTheme}
-                />
-              ) : (
-                <BsFillMoonStarsFill
-                  className="text-lg sm:text-xl md:text-2xl"
-                  //   onClick={handleTheme}
-                />
-              )}
-            </div>
           </div>
         )}
 

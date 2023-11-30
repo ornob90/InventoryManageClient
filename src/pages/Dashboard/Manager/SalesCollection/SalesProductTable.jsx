@@ -10,10 +10,11 @@ import toast from "react-hot-toast";
 
 const SalesProductTable = ({ products }) => {
   const { mutateAsync: addToCart } = usePostSecure(null, "/cart");
-
+  const { user } = useAuth();
   const handleCart = (id) => {
     const cartProduct = {
       product: id,
+      userEmail: user?.email,
     };
 
     Swal.fire({

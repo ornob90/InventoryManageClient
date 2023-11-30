@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../../components/html/Input";
 import Button from "../../components/html/Button";
 import { FcGoogle } from "react-icons/fc";
@@ -12,16 +12,62 @@ import axios from "axios";
 import BASE_URL from "../../utils/api";
 import toast from "react-hot-toast";
 import useUser from "../../hooks/others/useUser";
+import Loading from "../Loading/Loading";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/axios/useAxiosSecure";
 
 const Signup = () => {
-  const { signUpMethod } = useAuth();
+  const { signUpMethod, loading: authLoading, user } = useAuth();
   const [errorMsg, setErrorMsg] = useState("");
   const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
   const [loading, setLoading] = useState(false);
 
-  const { mutateAsync: addUser } = usePutPublic(null, "/user");
+  // const { mutateAsync: addUser } = usePutPublic(null, "/user");
+  const axiosSecure = useAxiosSecure();
+
+  // useEffect(() => {
+  //   if (user?.email && !authLoading) {
+  //     axiosSecure
+  //       .put("/user", { email: user?.email, name: user?.displayName })
+  //       .then((res) => {
+  //         console.log(res.data);
+
+  //         navigate("/create-shop");
+
+  //         setLoading(false);
+  //         toast.success("You have successfully signed up!");
+  //       });
+  //   }
+  // }, [user, user?.email, authLoading]);
+
+  const { mutateAsync: addUser } = useMutation({
+    mutationFn: async (data) => {
+      const res = await axiosSecure.put("/user", data);
+      return res?.data;
+    },
+    retry: 4,
+  });
+
+  useEffect(() => {
+    if (user?.email) {
+      addUser({ email: user?.email, name: user?.displayName })
+        .then((res) => {
+          console.log(res.data);
+          navigate("/create-shop");
+          setLoading(false);
+          toast.success("You have successfully signed up!");
+        })
+        .catch((err) => {
+          setLoading(false);
+          navigate("/create-shop");
+          console.error(err);
+          setErrorMsg(err.message);
+        });
+    }
+  }, [user, user?.email]);
+
   // const { setUser } = useAuth();
 
   const handleRegister = async (e) => {
@@ -70,18 +116,28 @@ const Signup = () => {
           photoURL: url,
         });
 
-        // addUser({ email, name }).then((res) => {
+        addUser({ email, name })
+          .then((res) => {
+            console.log(res.data);
+            navigate("/create-shop");
+            setLoading(false);
+            toast.success("You have successfully signed up!");
+          })
+          .catch((err) => {
+            setLoading(false);
+            // navigate("/create-shop");
+            console.error(err);
+            setErrorMsg(err.message);
+          });
 
+        // axios.put(BASE_URL + "/user", { email, name }).then((res) => {
+        //   console.log(res.data);
+
+        //   navigate("/create-shop");
+
+        //   setLoading(false);
+        //   toast.success("You have successfully signed up!");
         // });
-
-        axios.put(BASE_URL + "/user", { email, name }).then((res) => {
-          console.log(res.data);
-
-          navigate("/create-shop");
-
-          setLoading(false);
-          toast.success("You have successfully signed up!");
-        });
       })
       .catch((err) => {
         setLoading(false);
@@ -89,6 +145,8 @@ const Signup = () => {
         console.log(err);
       });
   };
+
+  if (loading) return <Loading />;
 
   return (
     <div className="h-screen min-h-[500px] w-[95%] md:w-[70%] lg:w-[60%] mx-auto flex  justify-center items-center">
@@ -143,10 +201,6 @@ const Signup = () => {
             Sign In
           </span>
         </p>
-        <div className="flex items-center justify-center w-full gap-2 py-2 text-sm duration-300 border cursor-pointer active:scale-95 md:text-base">
-          <FcGoogle />
-          <p>Continue Wih Google</p>
-        </div>
       </div>
     </div>
   );

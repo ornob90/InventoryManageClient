@@ -9,6 +9,8 @@ import useUser from "../../hooks/others/useUser";
 import BASE_URL from "../../utils/api";
 import axios from "axios";
 import useAxiosSecure from "../../hooks/axios/useAxiosSecure";
+import Loading from "../Loading/Loading";
+import { useMutation } from "@tanstack/react-query";
 
 const Login = () => {
   const { role } = useUser();
@@ -26,13 +28,23 @@ const Login = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
+  const { mutateAsync: addUser } = useMutation({
+    mutationFn: async (data) => {
+      const res = await axiosSecure.put("/user", data);
+      return res?.data;
+    },
+    retry: 4,
+  });
+
   useEffect(() => {
+    setLoading(true);
     if (role && role === "user") {
       navigate("/create-shop");
     } else if (role) {
       console.log(role);
       navigate("/dashboard");
     }
+    setLoading(false);
   }, [user, user?.email, role]);
 
   const axiosSecure = useAxiosSecure();
@@ -83,18 +95,32 @@ const Login = () => {
         const { email, displayName } = res.user;
         // console.log(email, displayName, res.user);
 
-        axios
-          .put(BASE_URL + "/user", { email, name: displayName })
+        // axios
+        //   .put(BASE_URL + "/user", { email, name: displayName })
+        //   .then((res) => {
+        //     console.log(res.data);
+
+        //     // handleCheckRoleAndNavigate(email);
+
+        //     // setLoading(false);
+
+        //     if (res.data.insertOne)
+        //       toast.success("You have successfully signed in!!");
+        //     else toast.success("User Exist!!");
+        //   });
+
+        addUser({ email, name: displayName })
           .then((res) => {
             console.log(res.data);
-
-            handleCheckRoleAndNavigate(email);
-
+            navigate("/create-shop");
             setLoading(false);
-
-            if (res.data.insertOne)
-              toast.success("You have successfully signed in!!");
-            else toast.success("User Exist!!");
+            toast.success("You have successfully Logged in!");
+          })
+          .catch((err) => {
+            setLoading(false);
+            navigate("/create-shop");
+            console.error(err);
+            setErrorMsg(err.message);
           });
       })
       .catch((err) => {
@@ -103,6 +129,8 @@ const Login = () => {
         console.log(err);
       });
   };
+
+  if (loading) return <Loading />;
 
   return (
     <div className="h-screen min-h-[500px] w-[95%] md:w-[70%] lg:w-[60%] mx-auto flex  justify-center items-center">

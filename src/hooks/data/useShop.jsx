@@ -26,8 +26,8 @@ const useShop = () => {
   //   }
   // }, [user, BASE_URL]);
 
-  console.log(shop.shopId);
-  return { shopID: shop.shopID, loading };
+  // console.log(shop.shopId);
+  return { shopID: shop?.shopID, loading };
 };
 
 export default useShop;

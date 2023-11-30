@@ -20,11 +20,17 @@ import useAxiosSecure from "../../../../hooks/axios/useAxiosSecure";
 // import { usePDF } from "react-to-pdf";
 import generatePDF, { Resolution, Margin } from "react-to-pdf";
 import toast from "react-hot-toast";
+import useAuth from "../../../../hooks/auth/useAuth";
 
 const Checkout = () => {
   const navigate = useNavigate();
   // const [cartProducts, setCartProducts] = useState([]);
-  const { data: cartProducts, isLoading } = useGetSecure(["Cart"], "/cart");
+  const { user } = useAuth();
+
+  const { data: cartProducts, isLoading } = useGetSecure(
+    ["Cart"],
+    `/cart?email=${user?.email}`
+  );
   // const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
   // const axiosSecure = useAxiosSecure();
   const targetRef = useRef();
@@ -33,7 +39,10 @@ const Checkout = () => {
   //   axiosSecure.get("/cart").then((res) => setCartProducts(res.data));
   // }, []);
 
-  const { mutateAsync: addToSales } = usePostSecure([["Cart"]], `/sales`);
+  const { mutateAsync: addToSales } = usePostSecure(
+    [["Cart"]],
+    `/sales?email=${user?.email}`
+  );
 
   const contentRef = useRef();
 
@@ -153,9 +162,9 @@ const Checkout = () => {
 
   const handleGetPaid = async () => {
     try {
-      // const response = await addToSales(cartProducts || []);
+      const response = await addToSales(cartProducts || []);
       // console.log(response);
-      // toast.success("paid successfully!");
+      toast.success("paid successfully!");
       // await generatePDF();
       // console.log("toPDF()");
       // toPDF();
@@ -169,10 +178,7 @@ const Checkout = () => {
   return (
     <ShortContainer className="mt-10">
       <div id="checkout">
-        <div className="flex items-center justify-between pb-3 border-b-2">
-          <h1 className="text-xl font-semibold">
-            Products: <span className="text-2xl font-bold text-primary">5</span>
-          </h1>
+        <div className="flex items-center justify-end pb-3 border-b-2">
           <button
             onClick={handleGetPaid}
             className="flex items-center gap-2 px-4 py-2 bg-primary"

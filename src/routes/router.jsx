@@ -104,7 +104,7 @@ const router = createBrowserRouter([
             <UpdateProduct />
           </ManagerRoute>
         ),
-        loader: ({ params }) => fetch(BASE_URL + `/product/${params.id}`),
+        // loader: ({ params }) => fetch(BASE_URL + `/product/${params.id}`),
       },
       {
         path: "/dashboard/checkout",
