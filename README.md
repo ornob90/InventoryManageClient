@@ -10,8 +10,8 @@ InventoryHub is a web application built using the MERN (MongoDB, Express.js, Rea
 
 ## Admin Credentials
 
-- Username: admin@example.com
-- Password: adminpassword
+- Username: admin@gmail.com
+- Password: Ornob1200,()
 
 ## Features
 
