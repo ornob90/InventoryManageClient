@@ -13,6 +13,12 @@ InventoryHub is a web application built using the MERN (MongoDB, Express.js, Rea
 - Username: admin@gmail.com
 - Password: Ornob1200,()
 
+## A Shop Manager Credentials
+
+- Username: electronics_owner@example.com
+- Password: Ornob1200,()
+
+
 ## Features
 
 ### System Admin
