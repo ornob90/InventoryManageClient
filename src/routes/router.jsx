@@ -140,7 +140,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin/sales-summary",
-        element: <AdminSalesSummary />,
+        element: (
+          <AdminRoute>
+            <AdminSalesSummary />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/admin/manage-shop",

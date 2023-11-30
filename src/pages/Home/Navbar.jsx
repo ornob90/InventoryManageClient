@@ -10,7 +10,7 @@ import Loading from "../Loading/Loading";
 
 // import useGet from "../../hooks/useGet";
 // import useAdmin from "../../hooks/useAdmin";
-// import logo from "../../assets/logo/logo.png";
+import logo from "/logo.png";
 // import useTheme from "../../Hooks/useTheme";
 
 const Navbar = () => {
@@ -255,7 +255,7 @@ const Navbar = () => {
           >
             <div className=" w-[25px] h-[25px] md:w-[45px] md:h-[45px] ">
               <img
-                // src={logo}
+                src={logo}
                 alt=""
                 className="object-contain h-full rounded-sm"
               />
