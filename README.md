@@ -8,6 +8,11 @@ InventoryHub is a web application built using the MERN (MongoDB, Express.js, Rea
 
 [InventoryHub Live](https://inventorymanage-48123.web.app/)
 
+## SERVER
+```
+https://github.com/ornob90/InventoryManageServer
+```
+
 ## Admin Credentials
 
 <<<<<<< HEAD
